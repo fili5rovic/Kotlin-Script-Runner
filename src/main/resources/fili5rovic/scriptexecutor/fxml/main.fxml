@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fili5rovic.scriptexecutor.controller.MainController">
+    <top>
+        <HBox BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar prefHeight="25.0" prefWidth="151.0">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="About">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="This project" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <Region prefHeight="0.0" prefWidth="200.0" />
+                <Button mnemonicParsing="false" text="Run Script" />
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.561122244488978" prefHeight="500.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+            <items>
+                <BorderPane fx:id="codeBP" />
+            <BorderPane fx:id="consoleBP">
+               <center>
+                  <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>

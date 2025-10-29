@@ -1,0 +1,160 @@
+@import 'variables';
+
+.root {
+  -fx-background-color: $bg-main;
+  -fx-font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
+  -fx-font-size: 13px;
+}
+
+.menu-bar {
+  -fx-background-color: $bg-elevated;
+  -fx-border-color: $border-subtle;
+  -fx-border-width: 0 0 1 0;
+  -fx-padding: 2 0 2 0;
+}
+
+.menu {
+  -fx-text-fill: $text-primary;
+  -fx-padding: 5 10 5 10;
+
+  &:hover {
+    -fx-background-color: $bg-light;
+  }
+
+  &:showing {
+    -fx-background-color: $bg-light;
+  }
+}
+
+.menu .label {
+  -fx-text-fill: $text-primary;
+}
+
+.menu-item {
+  -fx-background-color: $bg-elevated;
+  -fx-text-fill: $text-primary;
+  -fx-padding: 8 12 8 12;
+
+  &:hover {
+    -fx-background-color: $bg-light;
+  }
+
+  &:focused {
+    -fx-background-color: $bg-light;
+  }
+}
+
+.menu-item .label {
+  -fx-text-fill: $text-primary;
+}
+
+.context-menu {
+  -fx-background-color: $bg-elevated;
+  -fx-border-color: $border;
+  -fx-border-width: 1;
+  -fx-background-radius: $radius-sm;
+  -fx-border-radius: $radius-sm;
+  -fx-effect: dropshadow(gaussian, $shadow-medium, 10, 0, 0, 2);
+}
+
+.button {
+  -fx-background-color: $accent;
+  -fx-text-fill: white;
+  -fx-font-weight: 600;
+  -fx-padding: 6 16 6 16;
+  -fx-background-radius: $radius-sm;
+  -fx-border-radius: $radius-sm;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, $shadow-light, 4, 0, 0, 1);
+
+  &:hover {
+    -fx-background-color: $accent-hover;
+  }
+
+  &:pressed {
+    -fx-background-color: derive($accent, -10%);
+    -fx-effect: dropshadow(gaussian, $shadow-light, 2, 0, 0, 1);
+  }
+}
+
+.split-pane {
+  -fx-background-color: $bg-main;
+  -fx-padding: 0;
+}
+
+.split-pane-divider {
+  -fx-background-color: $border;
+  -fx-padding: 0 2 0 2;
+
+  &:hover {
+    -fx-background-color: $border-light;
+  }
+}
+
+.border-pane {
+  -fx-background-color: $bg-main;
+}
+
+.anchor-pane {
+  -fx-background-color: $bg-main;
+}
+
+.h-box {
+  -fx-background-color: transparent;
+}
+
+.region {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar {
+  -fx-background-color: transparent;
+
+  .thumb {
+    -fx-background-color: $bg-lightest;
+    -fx-background-radius: 4;
+
+    &:hover {
+      -fx-background-color: $border-light;
+    }
+  }
+
+  .track {
+    -fx-background-color: transparent;
+  }
+
+  .increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+  }
+
+  .increment-arrow, .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+  }
+}
+
+.scroll-bar:vertical {
+  -fx-padding: 2 0 2 0;
+
+  .thumb {
+    -fx-background-insets: 0 2 0 2;
+  }
+}
+
+.scroll-bar:horizontal {
+  -fx-padding: 0 2 0 2;
+
+  .thumb {
+    -fx-background-insets: 2 0 2 0;
+  }
+}
+
+.text-area {
+  -fx-background-color: $bg-dark;
+  -fx-text-fill: $text-primary;
+}
+
+.text-area .content {
+  -fx-background-color: $bg-dark;
+}

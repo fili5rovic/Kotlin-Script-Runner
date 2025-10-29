@@ -1,0 +1,73 @@
+@import 'variables';
+
+.code-area {
+  -fx-background-color: $bg-main;
+  -fx-text-fill: $text-primary;
+  -fx-border-color: $border;
+  -fx-border-width: 1;
+  -fx-font-family: "Consolas", "Monaco", "Courier New", monospace;
+  -fx-font-size: 14px;
+
+  .virtual-flow {
+    -fx-background-color: $bg-main;
+  }
+
+  .paragraph-text {
+    -fx-tab-size: 2;
+  }
+
+  .paragraph-box {
+    -fx-background-color: $bg-main;
+  }
+
+  .selection {
+    -fx-fill: white;
+    -fx-background-color: $accent;
+  }
+}
+
+.line-number-box {
+  -fx-background-color: $bg-main;
+  -fx-border-color: $border;
+  -fx-border-width: 0 1 0 0;
+  -fx-padding: 2 8 2 5;
+}
+
+.line-number-text {
+  -fx-text-fill: $text-secondary;
+  -fx-font-family: "Consolas", "Monaco", "Courier New", monospace;
+}
+
+.caret {
+    -fx-stroke: $text-primary;
+}
+
+.keyword {
+  -fx-fill: #CC7832;
+  -fx-font-weight: bold;
+}
+
+.string {
+  -fx-fill: #6A8759;
+}
+
+.comment {
+  -fx-fill: #808080;
+  -fx-font-style: italic;
+}
+
+.function {
+  -fx-fill: #FFC66D;
+}
+
+.annotation {
+  -fx-fill: #BBB529;
+}
+
+.number {
+  -fx-fill: #a82a8e;
+}
+
+.default_text {
+  -fx-fill: #A9B7C6;
+}
