@@ -24,7 +24,7 @@ public class LineNumberFactory implements IntFunction<Node> {
     private static final int MIN_INDICATOR_SIZE = 8;
     private static final int INDICATOR_SIZE_DIVIDER = 2;
 
-    private static final int MAX_FONT_SIZE = 36;
+    private static final int MAX_FONT_SIZE = 100;
     private static final int MIN_FONT_SIZE = 8;
 
     private final CodeArea codeGalaxy;

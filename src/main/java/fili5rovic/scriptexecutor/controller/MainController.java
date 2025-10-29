@@ -2,7 +2,9 @@ package fili5rovic.scriptexecutor.controller;
 
 import fili5rovic.scriptexecutor.manager.CodeManager;
 import fili5rovic.scriptexecutor.manager.IManager;
+import fili5rovic.scriptexecutor.manager.MenuItemManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
@@ -15,11 +17,17 @@ public class MainController extends ControllerBase {
     @FXML
     private BorderPane consoleBP;
 
+    @FXML
+    private MenuItem menuItemNewScript;
+
+    @FXML
+    private MenuItem menuItemOpenFile;
 
     @Override
     protected List<IManager> createManagers() {
         List<IManager> managers = new ArrayList<>();
         managers.add(new CodeManager(codeBP, consoleBP));
+        managers.add(new MenuItemManager(menuItemNewScript, menuItemOpenFile));
         return managers;
     }
 }
