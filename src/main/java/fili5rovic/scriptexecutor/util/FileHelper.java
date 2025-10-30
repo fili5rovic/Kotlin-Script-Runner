@@ -58,6 +58,13 @@ public class FileHelper {
         return directoryChooser.showDialog(stage);
     }
 
+    public static File saveFileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kt"));
+        return fileChooser.showSaveDialog(null);
+    }
+
     public static File openFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Kotlin file");

@@ -6,6 +6,7 @@ public class OpenFileTracker {
 
     private static OpenFileTracker instance;
     private File file;
+    private String lastSavedContent = ""; // Čuva poslednji sačuvani sadržaj
 
     private OpenFileTracker() {}
 
@@ -17,20 +18,35 @@ public class OpenFileTracker {
 
     public void registerOpenedFile(File file) {
         this.file = file;
+        if (file != null) {
+            this.lastSavedContent = FileHelper.readFromFile(file.getAbsolutePath());
+        } else {
+            this.lastSavedContent = ""; // Novi prazan fajl
+        }
     }
 
     public boolean isModified(String currentContent) {
-        if (file == null) return false;
-        String diskContent = FileHelper.readFromFile(file.getAbsolutePath());
-        return !diskContent.equals(currentContent);
+        return !lastSavedContent.equals(currentContent);
     }
 
     public void save(String newContent) {
         if (file == null) return;
         FileHelper.writeToFile(file.getAbsolutePath(), newContent);
+        this.lastSavedContent = newContent; // Ažuriraj nakon čuvanja
+    }
+
+    public void saveAs(File newFile, String content) {
+        this.file = newFile;
+        FileHelper.writeToFile(newFile.getAbsolutePath(), content);
+        this.lastSavedContent = content;
     }
 
     public File getFile() {
         return file;
+    }
+
+    public boolean hasUnsavedContent(String currentContent) {
+        return !currentContent.equals(lastSavedContent) &&
+                !currentContent.isEmpty();
     }
 }

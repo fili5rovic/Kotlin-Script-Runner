@@ -2,8 +2,7 @@ package fili5rovic.scriptexecutor.manager;
 
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
-import fili5rovic.scriptexecutor.events.myEvents.FileOpenedEvent;
-import fili5rovic.scriptexecutor.events.myEvents.NewFileRequest;
+import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import javafx.event.ActionEvent;
@@ -46,7 +45,7 @@ public class MenuItemManager implements IManager {
     }
 
     private void handleNewScript(ActionEvent e) {
-        EventBus.instance().publish(new NewFileRequest());
+        EventBus.instance().publish(new NewFileRequestEvent());
     }
 
 }

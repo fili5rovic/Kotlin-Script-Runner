@@ -1,55 +1,52 @@
-package fili5rovic.scriptexecutor.manager;
+package fili5rovic.scriptexecutor.manager.codeManager;
 
 import fili5rovic.scriptexecutor.events.EventBus;
-import fili5rovic.scriptexecutor.events.myEvents.ExitAppRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
+import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
 import fili5rovic.scriptexecutor.fxcode.MyCodeArea;
-import fili5rovic.scriptexecutor.fxcode.MyConsoleArea;
+import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import fili5rovic.scriptexecutor.util.OpenFileTracker;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class CodeManager implements IManager {
-    private final BorderPane codeBP;
-    private final BorderPane consoleBP;
+public class CodeEventManager implements IManager {
+    private final MyCodeArea myCodeArea;
     private final Stage stage;
 
-    private MyCodeArea myCodeArea;
-    private MyConsoleArea myConsoleArea;
-
-    public CodeManager(Stage stage, BorderPane codeBP, BorderPane consoleBP) {
+    public CodeEventManager(Stage stage, MyCodeArea codeArea) {
         this.stage = stage;
-        this.codeBP = codeBP;
-        this.consoleBP = consoleBP;
+        this.myCodeArea = codeArea;
     }
 
     @Override
     public void initialize() {
-        createCodeAreas();
         EventBus.instance().register(FileOpenRequestEvent.class, this::onFileOpenRequest);
         EventBus.instance().register(SaveFileRequestEvent.class, this::onSaveFileRequest);
+        EventBus.instance().register(NewFileRequestEvent.class, this::onNewFileRequest);
 
         this.stage.setOnCloseRequest(this::onExitAppRequest);
     }
 
-    private void onExitAppRequest(WindowEvent e) {
-        String currentContent = myCodeArea.getText();
-        if (OpenFileTracker.instance().isModified(currentContent)) {
-            File openedFile = OpenFileTracker.instance().getFile();
-            boolean cancelledDialog = alertShouldSaveCurrent(openedFile);
+    private void onNewFileRequest(NewFileRequestEvent event) {
+        if (promptSaveIfNeeded())
+            return;
 
-            if (cancelledDialog)
-                e.consume();
-        }
+        myCodeArea.clear();
+        OpenFileTracker.instance().registerOpenedFile(null);
+        stage.setTitle("ScriptExecutor");
+    }
+
+    private void onExitAppRequest(WindowEvent e) {
+        if (promptSaveIfNeeded())
+            e.consume();
     }
 
     private void onSaveFileRequest(SaveFileRequestEvent event) {
@@ -57,42 +54,39 @@ public class CodeManager implements IManager {
             return;
 
         String currentContent = myCodeArea.getText();
-        OpenFileTracker.instance().save(currentContent);
-    }
-
-    private void createCodeAreas() {
-        myCodeArea = new MyCodeArea();
-        myConsoleArea = new MyConsoleArea();
-        codeBP.setCenter(myCodeArea);
-        consoleBP.setCenter(myConsoleArea);
+        if (OpenFileTracker.instance().getFile() == null) {
+            saveAs(currentContent);
+        } else {
+            OpenFileTracker.instance().save(currentContent);
+        }
     }
 
     private void onFileOpenRequest(FileOpenRequestEvent event) {
         if (event == null || event.getFile() == null)
             return;
 
-        File newFile = event.getFile();
-        File openedFile = OpenFileTracker.instance().getFile();
+        if (promptSaveIfNeeded())
+            return;
 
-        if (openedFile != null) {
-            String currentContent = myCodeArea.getText();
-
-            if (OpenFileTracker.instance().isModified(currentContent)) {
-                boolean cancelledDialog = alertShouldSaveCurrent(openedFile);
-
-                if (cancelledDialog)
-                    return;
-            }
-        }
-
-        openFile(newFile);
+        openFile(event.getFile());
     }
 
-    private boolean alertShouldSaveCurrent(File openedFile) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    private boolean promptSaveIfNeeded() {
+        String currentContent = myCodeArea.getText();
+
+        if (!OpenFileTracker.instance().hasUnsavedContent(currentContent)) {
+            return false;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Unsaved Changes");
-        alert.setHeaderText("Do you want to save changes to the current file?");
-        alert.setContentText(openedFile.getName());
+        alert.setGraphic(null);
+
+        File currentFile = OpenFileTracker.instance().getFile();
+        String fileName = currentFile != null ? currentFile.getName() : "Untitled";
+
+        alert.setHeaderText(null);
+        alert.setContentText("Save changes to: " + fileName + " ?");
 
         ButtonType saveButton = new ButtonType("Save");
         ButtonType dontSaveButton = new ButtonType("Don't Save");
@@ -102,16 +96,31 @@ public class CodeManager implements IManager {
 
         AtomicBoolean cancelled = new AtomicBoolean(false);
 
-        String currentContent = myCodeArea.getText();
-
         alert.showAndWait().ifPresent(response -> {
             if (response == saveButton) {
-                OpenFileTracker.instance().save(currentContent);
+                if (currentFile != null) {
+                    OpenFileTracker.instance().save(currentContent);
+                } else {
+                    if (!saveAs(currentContent)) {
+                        cancelled.set(true);
+                    }
+                }
             } else if (response == cancelButton) {
                 cancelled.set(true);
             }
         });
+
         return cancelled.get();
+    }
+
+    private boolean saveAs(String content) {
+        File file = FileHelper.saveFileChooser();
+        if (file != null) {
+            OpenFileTracker.instance().saveAs(file, content);
+            stage.setTitle("ScriptExecutor - " + file.getName());
+            return true;
+        }
+        return false;
     }
 
     public void openFile(File file) {
@@ -120,7 +129,6 @@ public class CodeManager implements IManager {
         myCodeArea.insertText(0, content);
 
         OpenFileTracker.instance().registerOpenedFile(file);
-
-        this.stage.setTitle("ScriptExecutor - " + file.getName());
+        stage.setTitle("ScriptExecutor - " + file.getName());
     }
 }

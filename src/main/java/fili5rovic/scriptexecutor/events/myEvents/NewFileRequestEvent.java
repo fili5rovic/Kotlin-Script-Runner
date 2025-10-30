@@ -1,4 +1,4 @@
 package fili5rovic.scriptexecutor.events.myEvents;
 
-public class NewFileRequest extends MyEvent{
+public class NewFileRequestEvent extends MyEvent {
 }

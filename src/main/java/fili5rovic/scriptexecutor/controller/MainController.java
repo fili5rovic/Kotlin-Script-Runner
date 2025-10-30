@@ -1,6 +1,6 @@
 package fili5rovic.scriptexecutor.controller;
 
-import fili5rovic.scriptexecutor.manager.CodeManager;
+import fili5rovic.scriptexecutor.manager.codeManager.CodeManager;
 import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.manager.MenuItemManager;
 import javafx.fxml.FXML;
