@@ -24,8 +24,6 @@ public class ConsoleArea extends CodeArea {
     }
 
     public void applyProcess(Process process) {
-
-
         this.redirector.registerProcess(process);
         this.redirector.redirectStreams();
 

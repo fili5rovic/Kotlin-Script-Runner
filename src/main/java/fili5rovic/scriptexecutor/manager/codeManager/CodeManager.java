@@ -1,8 +1,7 @@
 package fili5rovic.scriptexecutor.manager.codeManager;
 
 import fili5rovic.scriptexecutor.console.ConsoleArea;
-import fili5rovic.scriptexecutor.fxcode.MyCodeArea;
-import fili5rovic.scriptexecutor.fxcode.MyConsoleArea;
+import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
 import fili5rovic.scriptexecutor.manager.IManager;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -15,8 +14,6 @@ public class CodeManager implements IManager {
     private MyCodeArea myCodeArea;
     private ConsoleArea myConsoleArea;
 
-    private CodeEventManager eventManager;
-
     public CodeManager(Stage stage, BorderPane codeBP, BorderPane consoleBP) {
         this.stage = stage;
         this.codeBP = codeBP;
@@ -26,8 +23,8 @@ public class CodeManager implements IManager {
     @Override
     public void initialize() {
         createCodeAreas();
-        this.eventManager = new CodeEventManager(stage,myCodeArea, myConsoleArea);
-        this.eventManager.initialize();
+        CodeEventManager eventManager = new CodeEventManager(stage, myCodeArea, myConsoleArea);
+        eventManager.initialize();
     }
 
     private void createCodeAreas() {

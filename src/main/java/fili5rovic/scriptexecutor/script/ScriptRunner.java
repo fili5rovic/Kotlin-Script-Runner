@@ -1,7 +1,6 @@
 package fili5rovic.scriptexecutor.script;
 
 import fili5rovic.scriptexecutor.console.ConsoleArea;
-import fili5rovic.scriptexecutor.fxcode.MyConsoleArea;
 import javafx.application.Platform;
 
 import java.io.*;
@@ -15,7 +14,6 @@ public class ScriptRunner {
                 ProcessBuilder pb = new ProcessBuilder(kotlinCommand, "-script", scriptPath);
                 Process process = pb.start();
                 console.applyProcess(process);
-
             } catch (IOException e) {
                 Platform.runLater(() -> console.appendText("\n[Error: " + e.getMessage() + "]\n"));
             }

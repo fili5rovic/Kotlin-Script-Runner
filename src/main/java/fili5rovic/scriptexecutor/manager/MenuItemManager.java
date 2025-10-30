@@ -52,7 +52,7 @@ public class MenuItemManager implements IManager {
     }
 
     private void handleOpenFile(ActionEvent e) {
-        File file = FileHelper.openFileChooser();
+        File file = FileHelper.openFileChooser("Select Kotlin file");
         if (file == null)
             return;
 

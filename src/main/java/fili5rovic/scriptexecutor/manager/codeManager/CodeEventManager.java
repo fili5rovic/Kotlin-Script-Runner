@@ -7,8 +7,7 @@ import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.RunCodeRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
-import fili5rovic.scriptexecutor.fxcode.MyCodeArea;
-import fili5rovic.scriptexecutor.fxcode.MyConsoleArea;
+import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
 import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.script.ScriptRunner;
 import fili5rovic.scriptexecutor.util.FileHelper;
@@ -51,10 +50,12 @@ public class CodeEventManager implements IManager {
         if(event == null)
             return;
 
+
+
         File file = OpenFileTracker.instance().getFile();
         if(file == null) {
             try {
-                File tempFile = File.createTempFile("script",".kts");
+                File tempFile = File.createTempFile("untitled",".kts");
                 String code = codeArea.getText();
                 Files.writeString(tempFile.toPath(), code);
                 file = tempFile;
@@ -147,7 +148,7 @@ public class CodeEventManager implements IManager {
     }
 
     private boolean saveAs(String content) {
-        File file = FileHelper.saveFileChooser();
+        File file = FileHelper.openFileChooser("Save File");
         if (file != null) {
             OpenFileTracker.instance().saveAs(file, content);
             stage.setTitle("ScriptExecutor - " + file.getName());

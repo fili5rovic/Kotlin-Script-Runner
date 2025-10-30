@@ -1,4 +1,4 @@
-package fili5rovic.scriptexecutor.fxcode;
+package fili5rovic.scriptexecutor.myCodeArea;
 
 import org.fxmisc.richtext.CodeArea;
 

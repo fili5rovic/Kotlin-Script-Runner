@@ -36,25 +36,9 @@ public class FileHelper {
         }
     }
 
-    public static File openFolderChooser(Stage stage, File initialDirectory) {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Select Folder");
-        if (initialDirectory != null)
-            directoryChooser.setInitialDirectory(initialDirectory);
-
-        return directoryChooser.showDialog(stage);
-    }
-
-    public static File saveFileChooser() {
+    public static File openFileChooser(String title) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kts"));
-        return fileChooser.showSaveDialog(null);
-    }
-
-    public static File openFileChooser() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Kotlin file");
+        fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kts"));
         return fileChooser.showOpenDialog(null);
     }
