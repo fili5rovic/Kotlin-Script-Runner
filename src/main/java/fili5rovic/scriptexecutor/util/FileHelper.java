@@ -48,7 +48,7 @@ public class FileHelper {
     public static File saveFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kts"));
         return fileChooser.showSaveDialog(null);
     }
 

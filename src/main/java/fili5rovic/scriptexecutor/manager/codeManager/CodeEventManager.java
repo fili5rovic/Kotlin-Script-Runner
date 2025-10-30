@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.manager.codeManager;
 
 import fili5rovic.scriptexecutor.Main;
+import fili5rovic.scriptexecutor.console.ConsoleArea;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
@@ -27,9 +28,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class CodeEventManager implements IManager {
     private final MyCodeArea codeArea;
     private final Stage stage;
-    private final MyConsoleArea consoleArea;
+    private final ConsoleArea consoleArea;
 
-    public CodeEventManager(Stage stage, MyCodeArea codeArea, MyConsoleArea consoleArea) {
+    public CodeEventManager(Stage stage, MyCodeArea codeArea, ConsoleArea consoleArea) {
         this.stage = stage;
         this.codeArea = codeArea;
         this.consoleArea = consoleArea;

@@ -1,5 +1,6 @@
 package fili5rovic.scriptexecutor.manager.codeManager;
 
+import fili5rovic.scriptexecutor.console.ConsoleArea;
 import fili5rovic.scriptexecutor.fxcode.MyCodeArea;
 import fili5rovic.scriptexecutor.fxcode.MyConsoleArea;
 import fili5rovic.scriptexecutor.manager.IManager;
@@ -12,7 +13,7 @@ public class CodeManager implements IManager {
     private final Stage stage;
 
     private MyCodeArea myCodeArea;
-    private MyConsoleArea myConsoleArea;
+    private ConsoleArea myConsoleArea;
 
     private CodeEventManager eventManager;
 
@@ -27,13 +28,11 @@ public class CodeManager implements IManager {
         createCodeAreas();
         this.eventManager = new CodeEventManager(stage,myCodeArea, myConsoleArea);
         this.eventManager.initialize();
-
-
     }
 
     private void createCodeAreas() {
         myCodeArea = new MyCodeArea();
-        myConsoleArea = new MyConsoleArea();
+        myConsoleArea = new ConsoleArea();
         codeBP.setCenter(myCodeArea);
         consoleBP.setCenter(myConsoleArea);
     }
