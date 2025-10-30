@@ -49,6 +49,7 @@ public class Redirector {
                 int ch;
                 while (running && (ch = inputStream.read()) != -1) {
                     char c = (char) ch;
+                    // carriage return should be ignored on windows
                     if (c == '\r') continue;
                     Platform.runLater(() -> console.appendTextWithType(String.valueOf(c), type));
                 }

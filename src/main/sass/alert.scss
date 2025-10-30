@@ -1,7 +1,7 @@
 @import 'variables';
 
 .dialog-pane {
-  -fx-background-color: $bg-elevated;
+  -fx-background-color: $bg-dark;
   -fx-border-color: $border;
   -fx-border-width: 1;
   -fx-padding: 20;
@@ -16,7 +16,7 @@
 }
 
 .dialog-pane > .button-bar {
-  -fx-background-color: $bg-elevated;
+  -fx-background-color: $bg-dark;
   -fx-padding: 16 0 0 0;
   -fx-spacing: 8;
 }

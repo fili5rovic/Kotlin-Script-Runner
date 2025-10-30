@@ -7,7 +7,7 @@
 }
 
 .menu-bar {
-  -fx-background-color: $bg-elevated;
+  -fx-background-color: $bg-main;
   -fx-border-color: $border-subtle;
   -fx-border-width: 0 0 1 0;
   -fx-padding: 2 0 2 0;
@@ -31,7 +31,7 @@
 }
 
 .menu-item {
-  -fx-background-color: $bg-elevated;
+  -fx-background-color: $bg-dark;
   -fx-text-fill: $text-primary;
   -fx-padding: 8 12 8 12;
 
@@ -49,12 +49,14 @@
 }
 
 .context-menu {
-  -fx-background-color: $bg-elevated;
+  -fx-background-color: $bg-dark;
   -fx-border-color: $border;
+  -fx-font-size: 16;
   -fx-border-width: 1;
   -fx-background-radius: $radius-sm;
   -fx-border-radius: $radius-sm;
   -fx-effect: dropshadow(gaussian, $shadow-medium, 10, 0, 0, 2);
+  -fx-padding: 0;
 }
 
 .button {

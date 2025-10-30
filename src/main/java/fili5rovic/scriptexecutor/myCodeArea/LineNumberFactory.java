@@ -26,13 +26,14 @@ public class LineNumberFactory implements IntFunction<Node> {
 
     private static final int MAX_FONT_SIZE = 100;
     private static final int MIN_FONT_SIZE = 8;
+    private static final int DEFAULT_FONT_SIZE = 24;
 
     private final CodeArea codeGalaxy;
     private int fontSize;
 
     public LineNumberFactory(CodeArea codeGalaxy) {
         this.codeGalaxy = codeGalaxy;
-        this.fontSize = 14;
+        this.fontSize = DEFAULT_FONT_SIZE;
 
         codeGalaxy.addEventFilter(ScrollEvent.SCROLL, e -> {
             if (e.isControlDown()) {
@@ -45,6 +46,8 @@ public class LineNumberFactory implements IntFunction<Node> {
                 }
             }
         });
+
+        applyZoom();
     }
 
     private void increaseFontSize() {

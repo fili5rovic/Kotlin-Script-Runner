@@ -1,6 +1,8 @@
 package fili5rovic.scriptexecutor.console;
 
 import fili5rovic.scriptexecutor.console.behaviour.BehaviourListener;
+import fili5rovic.scriptexecutor.console.behaviour.FontHelper;
+import fili5rovic.scriptexecutor.console.contextMenu.ConsoleContextMenu;
 import fili5rovic.scriptexecutor.console.highlighter.ConsoleHighlighter;
 import org.fxmisc.richtext.CodeArea;
 
@@ -19,6 +21,10 @@ public class ConsoleArea extends CodeArea {
     public ConsoleArea() {
         ConsoleHighlighter.apply(this);
         BehaviourListener.apply(this);
+        FontHelper fontHelper = new FontHelper(this);
+        fontHelper.applyZoomListener();
+
+        this.setContextMenu(new ConsoleContextMenu(this));
 
         this.redirector = new Redirector(this);
     }
