@@ -8,10 +8,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 public class FileHelper {
 
@@ -38,17 +36,6 @@ public class FileHelper {
         }
     }
 
-    public static void deleteRecursively(Path path) throws IOException {
-        if (Files.isDirectory(path)) {
-            try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
-                for (Path entry : entries) {
-                    deleteRecursively(entry);
-                }
-            }
-        }
-        Files.delete(path);
-    }
-
     public static File openFolderChooser(Stage stage, File initialDirectory) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select Folder");
@@ -68,16 +55,9 @@ public class FileHelper {
     public static File openFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Kotlin file");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kts"));
         return fileChooser.showOpenDialog(null);
     }
-
-    public static Path[] getAllFilesInDirectory(Path directory) throws IOException {
-        try (Stream<Path> stream = Files.walk(directory)) {
-            return stream.filter(Files::isRegularFile).toArray(Path[]::new);
-        }
-    }
-
 
 }
 

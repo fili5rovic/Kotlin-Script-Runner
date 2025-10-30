@@ -51,7 +51,7 @@
                     </menus>
                 </MenuBar>
                 <Region prefHeight="0.0" prefWidth="200.0" />
-                <Button mnemonicParsing="false" text="Run Script" />
+                <Button fx:id="runBtn" mnemonicParsing="false" text="Run Script" />
             </children>
         </HBox>
     </top>

@@ -4,9 +4,12 @@ import fili5rovic.scriptexecutor.Main;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
+import fili5rovic.scriptexecutor.events.myEvents.RunCodeRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
 import fili5rovic.scriptexecutor.fxcode.MyCodeArea;
+import fili5rovic.scriptexecutor.fxcode.MyConsoleArea;
 import fili5rovic.scriptexecutor.manager.IManager;
+import fili5rovic.scriptexecutor.script.ScriptRunner;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import fili5rovic.scriptexecutor.util.OpenFileTracker;
 import javafx.scene.control.Alert;
@@ -16,16 +19,20 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CodeEventManager implements IManager {
-    private final MyCodeArea myCodeArea;
+    private final MyCodeArea codeArea;
     private final Stage stage;
+    private final MyConsoleArea consoleArea;
 
-    public CodeEventManager(Stage stage, MyCodeArea codeArea) {
+    public CodeEventManager(Stage stage, MyCodeArea codeArea, MyConsoleArea consoleArea) {
         this.stage = stage;
-        this.myCodeArea = codeArea;
+        this.codeArea = codeArea;
+        this.consoleArea = consoleArea;
     }
 
     @Override
@@ -33,15 +40,37 @@ public class CodeEventManager implements IManager {
         EventBus.instance().register(FileOpenRequestEvent.class, this::onFileOpenRequest);
         EventBus.instance().register(SaveFileRequestEvent.class, this::onSaveFileRequest);
         EventBus.instance().register(NewFileRequestEvent.class, this::onNewFileRequest);
+        EventBus.instance().register(RunCodeRequestEvent.class, this::onCodeRunRequest);
+
 
         this.stage.setOnCloseRequest(this::onExitAppRequest);
+    }
+
+    private void onCodeRunRequest(RunCodeRequestEvent event) {
+        if(event == null)
+            return;
+
+        File file = OpenFileTracker.instance().getFile();
+        if(file == null) {
+            try {
+                File tempFile = File.createTempFile("script",".kts");
+                String code = codeArea.getText();
+                Files.writeString(tempFile.toPath(), code);
+                file = tempFile;
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+                return;
+            }
+        }
+        String path = file.getAbsolutePath();
+        ScriptRunner.runKotlinScript(path, consoleArea);
     }
 
     private void onNewFileRequest(NewFileRequestEvent event) {
         if (promptSaveIfNeeded())
             return;
 
-        myCodeArea.clear();
+        codeArea.clear();
         OpenFileTracker.instance().registerOpenedFile(null);
         stage.setTitle("ScriptExecutor");
     }
@@ -55,7 +84,7 @@ public class CodeEventManager implements IManager {
         if (event == null)
             return;
 
-        String currentContent = myCodeArea.getText();
+        String currentContent = codeArea.getText();
         if (OpenFileTracker.instance().getFile() == null) {
             saveAs(currentContent);
         } else {
@@ -74,7 +103,7 @@ public class CodeEventManager implements IManager {
     }
 
     private boolean promptSaveIfNeeded() {
-        String currentContent = myCodeArea.getText();
+        String currentContent = codeArea.getText();
 
         if (!OpenFileTracker.instance().hasUnsavedContent(currentContent)) {
             return false;
@@ -127,9 +156,9 @@ public class CodeEventManager implements IManager {
     }
 
     public void openFile(File file) {
-        myCodeArea.clear();
+        codeArea.clear();
         String content = FileHelper.readFromFile(file.getAbsolutePath());
-        myCodeArea.insertText(0, content);
+        codeArea.insertText(0, content);
 
         OpenFileTracker.instance().registerOpenedFile(file);
         stage.setTitle("ScriptExecutor - " + file.getName());

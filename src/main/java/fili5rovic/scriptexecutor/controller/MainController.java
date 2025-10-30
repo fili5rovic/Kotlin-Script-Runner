@@ -1,9 +1,11 @@
 package fili5rovic.scriptexecutor.controller;
 
+import fili5rovic.scriptexecutor.manager.ButtonManager;
 import fili5rovic.scriptexecutor.manager.codeManager.CodeManager;
 import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.manager.MenuItemManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -30,11 +32,15 @@ public class MainController extends ControllerBase {
     @FXML
     private MenuItem menuitemThisProject;
 
+    @FXML
+    private Button runBtn;
+
     @Override
     protected List<IManager> createManagers(Stage stage) {
         List<IManager> managers = new ArrayList<>();
         managers.add(new CodeManager(stage, codeBP, consoleBP));
         managers.add(new MenuItemManager(menuItemNewScript, menuItemOpenFile, menuItemSaveFile, menuitemThisProject));
+        managers.add(new ButtonManager(runBtn));
         return managers;
     }
 }

@@ -25,7 +25,7 @@ public class CodeManager implements IManager {
     @Override
     public void initialize() {
         createCodeAreas();
-        this.eventManager = new CodeEventManager(stage,myCodeArea);
+        this.eventManager = new CodeEventManager(stage,myCodeArea, myConsoleArea);
         this.eventManager.initialize();
 
 
