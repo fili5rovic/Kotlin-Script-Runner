@@ -2,6 +2,7 @@ module fili5rovic.scriptexecutor {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.fxmisc.richtext;
+    requires java.desktop;
 
 
     opens fili5rovic.scriptexecutor to javafx.fxml;

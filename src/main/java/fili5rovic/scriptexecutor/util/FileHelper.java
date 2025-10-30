@@ -69,11 +69,7 @@ public class FileHelper {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Kotlin file");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kt"));
-        File file = fileChooser.showOpenDialog(null);
-        if (file == null)
-            return null;
-
-        return file;
+        return fileChooser.showOpenDialog(null);
     }
 
     public static Path[] getAllFilesInDirectory(Path directory) throws IOException {

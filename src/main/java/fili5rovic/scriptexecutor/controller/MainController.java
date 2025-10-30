@@ -27,11 +27,14 @@ public class MainController extends ControllerBase {
     @FXML
     private MenuItem menuItemSaveFile;
 
+    @FXML
+    private MenuItem menuitemThisProject;
+
     @Override
     protected List<IManager> createManagers(Stage stage) {
         List<IManager> managers = new ArrayList<>();
         managers.add(new CodeManager(stage, codeBP, consoleBP));
-        managers.add(new MenuItemManager(menuItemNewScript, menuItemOpenFile, menuItemSaveFile));
+        managers.add(new MenuItemManager(menuItemNewScript, menuItemOpenFile, menuItemSaveFile, menuitemThisProject));
         return managers;
     }
 }

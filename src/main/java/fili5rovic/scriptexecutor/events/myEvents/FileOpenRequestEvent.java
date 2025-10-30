@@ -1,7 +1,5 @@
 package fili5rovic.scriptexecutor.events.myEvents;
 
-import fili5rovic.scriptexecutor.util.FileHelper;
-
 import java.io.File;
 
 public class FileOpenRequestEvent extends MyEvent{
