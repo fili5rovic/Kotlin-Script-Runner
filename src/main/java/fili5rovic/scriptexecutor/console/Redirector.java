@@ -2,9 +2,7 @@ package fili5rovic.scriptexecutor.console;
 
 import javafx.application.Platform;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class Redirector {
 
@@ -47,13 +45,12 @@ public class Redirector {
     private void redirectOutput(InputStream inputStream, int type) {
         running = true;
         currentThread = new Thread(() -> {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-                String line;
-                while (running && (line = reader.readLine()) != null) {
-                    final String finalLine = line + "\n";
-                    final int finalType = type;
-
-                    Platform.runLater(() -> console.appendTextWithType(finalLine, finalType));
+            try {
+                int ch;
+                while (running && (ch = inputStream.read()) != -1) {
+                    char c = (char) ch;
+                    if (c == '\r') continue;
+                    Platform.runLater(() -> console.appendTextWithType(String.valueOf(c), type));
                 }
             } catch (Exception e) {
                 System.err.println("Error reading output stream: " + e.getMessage());

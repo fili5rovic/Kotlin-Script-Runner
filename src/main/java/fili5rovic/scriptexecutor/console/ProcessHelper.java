@@ -2,19 +2,20 @@ package fili5rovic.scriptexecutor.console;
 
 import javafx.application.Platform;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class ProcessHelper {
 
     public static void waitForProcessExit(ConsoleArea console, Process process) {
-        new Thread(() -> {
+        AtomicInteger exitCode = new AtomicInteger();
+        CompletableFuture.runAsync(()-> {
             try {
-                int exitCode = process.waitFor();
-                Platform.runLater(() -> {
-                    onProcessExit(console, exitCode);
-                });
+                exitCode.set(process.waitFor());
             } catch (InterruptedException e) {
                 System.err.println("Process wait interrupted: " + e.getMessage());
             }
-        }).start();
+        }).thenRun(()-> Platform.runLater(() -> onProcessExit(console, exitCode.get())));
     }
 
     private static void onProcessExit(ConsoleArea console, int code) {

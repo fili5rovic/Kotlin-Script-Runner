@@ -148,7 +148,7 @@ public class CodeEventManager implements IManager {
     }
 
     private boolean saveAs(String content) {
-        File file = FileHelper.openFileChooser("Save File");
+        File file = FileHelper.saveFileChooser("Save script");
         if (file != null) {
             OpenFileTracker.instance().saveAs(file, content);
             stage.setTitle("ScriptExecutor - " + file.getName());

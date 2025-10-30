@@ -41,8 +41,8 @@ public class BehaviourListener {
             }
 
             String character = e.getCharacter();
-            if (character.isEmpty() || character.equals("\r") || character.equals("\n") ||
-                    character.equals("\b")) {
+            if (character.isEmpty() || character.equals("\r") ||
+                    character.equals("\n") || character.equals("\b")) {
                 e.consume();
                 return;
             }

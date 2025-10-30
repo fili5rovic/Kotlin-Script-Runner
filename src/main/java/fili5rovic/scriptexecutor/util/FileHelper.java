@@ -1,8 +1,6 @@
 package fili5rovic.scriptexecutor.util;
 
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,6 +32,13 @@ public class FileHelper {
         } catch (IOException e) {
             System.out.println("Couldn't write to file " + path);
         }
+    }
+
+    public static File saveFileChooser(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kts"));
+        return fileChooser.showSaveDialog(null);
     }
 
     public static File openFileChooser(String title) {
