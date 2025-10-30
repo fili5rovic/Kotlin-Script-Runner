@@ -124,8 +124,7 @@
   .code-area .paragraph-box {
     -fx-background-color: #161b22; }
   .code-area .selection {
-    -fx-fill: white;
-    -fx-background-color: #238636; }
+    -fx-fill: rgba(90, 90, 90, 0.22); }
 
 .line-number-box {
   -fx-background-color: #161b22;
