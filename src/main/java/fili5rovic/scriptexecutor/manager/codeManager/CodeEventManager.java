@@ -1,5 +1,6 @@
 package fili5rovic.scriptexecutor.manager.codeManager;
 
+import fili5rovic.scriptexecutor.Main;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CodeEventManager implements IManager {
@@ -79,6 +81,7 @@ public class CodeEventManager implements IManager {
         }
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/alert.css")).toExternalForm());
         alert.setTitle("Unsaved Changes");
         alert.setGraphic(null);
 
