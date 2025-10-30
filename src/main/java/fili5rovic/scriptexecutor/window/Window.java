@@ -19,7 +19,6 @@ public abstract class Window {
     protected Window(String title, String fxmlName) {
         this.title = title;
         this.fxmlName = fxmlName;
-
     }
 
     public void init(Stage stage) {
@@ -45,10 +44,9 @@ public abstract class Window {
             this.stage = stage;
             listeners();
 
-            baseController.setup();
+            baseController.setup(stage);
         } catch (Exception e) {
             System.err.println("Error loading window " + title + ": " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

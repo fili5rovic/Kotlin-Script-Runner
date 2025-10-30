@@ -28,6 +28,11 @@
                               <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
+                        <MenuItem fx:id="menuItemSaveFile" mnemonicParsing="false" text="Save File">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edit">
@@ -37,7 +42,10 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="About">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="This project" />
+                                <MenuItem mnemonicParsing="false" text="This project">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                           </accelerator></MenuItem>
                             </items>
                         </Menu>
                     </menus>

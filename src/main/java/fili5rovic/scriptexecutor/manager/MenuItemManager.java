@@ -1,7 +1,10 @@
 package fili5rovic.scriptexecutor.manager;
 
 import fili5rovic.scriptexecutor.events.EventBus;
+import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenedEvent;
+import fili5rovic.scriptexecutor.events.myEvents.NewFileRequest;
+import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.MenuItem;
@@ -11,10 +14,12 @@ import java.io.File;
 public class MenuItemManager implements IManager {
     private final MenuItem newScript;
     private final MenuItem openFile;
+    private final MenuItem saveFile;
 
-    public MenuItemManager(MenuItem newScript, MenuItem openFile) {
+    public MenuItemManager(MenuItem newScript, MenuItem openFile, MenuItem saveFile) {
         this.newScript = newScript;
         this.openFile = openFile;
+        this.saveFile = saveFile;
     }
 
     @Override
@@ -24,20 +29,24 @@ public class MenuItemManager implements IManager {
 
     private void setupListeners() {
         newScript.setOnAction(this::handleNewScript);
-        openFile.setOnAction(this::handleOpenScript);
+        openFile.setOnAction(this::handleOpenFile);
+        saveFile.setOnAction(this::handleSaveFile);
     }
 
-    private void handleOpenScript(ActionEvent e) {
+    private void handleSaveFile(ActionEvent event) {
+        EventBus.instance().publish(new SaveFileRequestEvent());
+    }
+
+    private void handleOpenFile(ActionEvent e) {
         File file = FileHelper.openFileChooser();
         if (file == null)
             return;
 
-        String content = FileHelper.readFromFile(file.getAbsolutePath());
-        EventBus.instance().publish(new FileOpenedEvent(file, content));
+        EventBus.instance().publish(new FileOpenRequestEvent(file));
     }
 
     private void handleNewScript(ActionEvent e) {
-        System.out.println("New loaded");
+        EventBus.instance().publish(new NewFileRequest());
     }
 
 }
