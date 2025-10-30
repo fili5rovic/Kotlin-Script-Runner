@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.console.contextMenu;
 
 import fili5rovic.scriptexecutor.console.ConsoleArea;
+import fili5rovic.scriptexecutor.util.SVGUtil;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
@@ -23,10 +24,12 @@ public class ConsoleContextMenu extends ContextMenu {
         getItems().clear();
 
         MenuItem copyItem = new MenuItem("Copy");
+        copyItem.setGraphic(SVGUtil.getUI("copy", 16));
         copyItem.setOnAction(e -> consoleArea.copy());
         copyItem.setDisable(true);
 
         MenuItem copyAllItem = new MenuItem("Copy All");
+        copyAllItem.setGraphic(SVGUtil.getUI("copy", 16));
         copyAllItem.setOnAction(e -> {
             ClipboardContent content = new ClipboardContent();
             content.putString(consoleArea.getText());
@@ -34,9 +37,11 @@ public class ConsoleContextMenu extends ContextMenu {
         });
 
         MenuItem selectAllItem = new MenuItem("Select All");
+        selectAllItem.setGraphic(SVGUtil.getUI("saveAll",16));
         selectAllItem.setOnAction(e -> consoleArea.selectAll());
 
         MenuItem clearItem = new MenuItem("Clear");
+        clearItem.setGraphic(SVGUtil.getUI("delete",16));
         clearItem.setOnAction(e -> consoleArea.clear());
 
         setOnShowing(e -> {

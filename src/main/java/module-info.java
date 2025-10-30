@@ -3,6 +3,8 @@ module fili5rovic.scriptexecutor {
     requires javafx.fxml;
     requires org.fxmisc.richtext;
     requires java.desktop;
+    requires com.kitfox.svg;
+    requires javafx.swing;
 
 
     opens fili5rovic.scriptexecutor to javafx.fxml;

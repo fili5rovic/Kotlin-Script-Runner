@@ -1,5 +1,6 @@
 package fili5rovic.scriptexecutor.manager;
 
+import fili5rovic.scriptexecutor.controller.MainController;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.RunCodeRequestEvent;
 import javafx.scene.control.Button;
@@ -7,8 +8,8 @@ import javafx.scene.control.Button;
 public class ButtonManager implements IManager {
     private final Button runBtn;
 
-    public ButtonManager(Button runBtn) {
-        this.runBtn = runBtn;
+    public ButtonManager(MainController controller) {
+        this.runBtn = controller.getRunBtn();
     }
 
     @Override

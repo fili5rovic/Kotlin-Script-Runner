@@ -1,28 +1,38 @@
 package fili5rovic.scriptexecutor.manager;
 
+import fili5rovic.scriptexecutor.controller.MainController;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
 import fili5rovic.scriptexecutor.util.FileHelper;
+import fili5rovic.scriptexecutor.util.SVGUtil;
 import javafx.event.ActionEvent;
-import javafx.scene.control.MenuItem;
 
 import java.awt.*;
 import java.io.File;
 import java.net.URI;
 
 public class MenuItemManager implements IManager {
-    private final MenuItem newScript;
-    private final MenuItem openFile;
-    private final MenuItem saveFile;
-    private final MenuItem thisProject;
+    private final MainController controller;
 
-    public MenuItemManager(MenuItem newScript, MenuItem openFile, MenuItem saveFile, MenuItem thisProject) {
-        this.newScript = newScript;
-        this.openFile = openFile;
-        this.saveFile = saveFile;
-        this.thisProject = thisProject;
+    public MenuItemManager(MainController controller) {
+        this.controller = controller;
+        icons();
+    }
+
+    private void icons() {
+        controller.getMenuItemSaveFile().setGraphic(SVGUtil.getUI("saveAll", 16));
+        controller.getMenuItemOpenFile().setGraphic(SVGUtil.getUI("open",16));
+        controller.getMenuItemNewScript().setGraphic(SVGUtil.getUI("new",16));
+        controller.getMenuitemThisProject().setGraphic(SVGUtil.getUI("github",16));
+        controller.getUndo().setGraphic(SVGUtil.getUI("undo", 16));
+        controller.getRedo().setGraphic(SVGUtil.getUI("redo", 16));
+        controller.getCut().setGraphic(SVGUtil.getUI("cut", 16));
+        controller.getCopy().setGraphic(SVGUtil.getUI("copy", 16));
+        controller.getPaste().setGraphic(SVGUtil.getUI("paste", 16));
+        controller.getDelete().setGraphic(SVGUtil.getUI("delete", 16));
+        controller.getSelectAll().setGraphic(SVGUtil.getUI("selectAll", 16));
     }
 
     private void handleThisProject(ActionEvent e) {
@@ -41,10 +51,10 @@ public class MenuItemManager implements IManager {
     }
 
     private void setupListeners() {
-        newScript.setOnAction(this::handleNewScript);
-        openFile.setOnAction(this::handleOpenFile);
-        saveFile.setOnAction(this::handleSaveFile);
-        thisProject.setOnAction(this::handleThisProject);
+        controller.getMenuItemNewScript().setOnAction(this::handleNewScript);
+        controller.getMenuItemOpenFile().setOnAction(this::handleOpenFile);
+        controller.getMenuItemSaveFile().setOnAction(this::handleSaveFile);
+        controller.getMenuitemThisProject().setOnAction(this::handleThisProject);
     }
 
     private void handleSaveFile(ActionEvent event) {

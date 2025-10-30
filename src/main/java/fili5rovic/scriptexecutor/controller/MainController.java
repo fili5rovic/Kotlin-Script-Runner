@@ -33,14 +33,93 @@ public class MainController extends ControllerBase {
     private MenuItem menuitemThisProject;
 
     @FXML
+    private MenuItem undo;
+
+    @FXML
+    private MenuItem redo;
+
+    @FXML
+    private MenuItem cut;
+
+    @FXML
+    private MenuItem copy;
+
+    @FXML
+    private MenuItem paste;
+
+    @FXML
+    private MenuItem delete;
+
+    @FXML
+    private MenuItem selectAll;
+
+    @FXML
     private Button runBtn;
 
     @Override
     protected List<IManager> createManagers(Stage stage) {
         List<IManager> managers = new ArrayList<>();
-        managers.add(new CodeManager(stage, codeBP, consoleBP));
-        managers.add(new MenuItemManager(menuItemNewScript, menuItemOpenFile, menuItemSaveFile, menuitemThisProject));
-        managers.add(new ButtonManager(runBtn));
+        managers.add(new CodeManager(stage, this));
+        managers.add(new MenuItemManager(this));
+        managers.add(new ButtonManager(this));
         return managers;
     }
+
+    //<editor-fold desc="Getters">
+    public BorderPane getCodeBP() {
+        return codeBP;
+    }
+
+    public BorderPane getConsoleBP() {
+        return consoleBP;
+    }
+
+    public MenuItem getMenuItemNewScript() {
+        return menuItemNewScript;
+    }
+
+    public MenuItem getMenuItemOpenFile() {
+        return menuItemOpenFile;
+    }
+
+    public MenuItem getMenuItemSaveFile() {
+        return menuItemSaveFile;
+    }
+
+    public MenuItem getMenuitemThisProject() {
+        return menuitemThisProject;
+    }
+
+    public MenuItem getUndo() {
+        return undo;
+    }
+
+    public MenuItem getRedo() {
+        return redo;
+    }
+
+    public MenuItem getCut() {
+        return cut;
+    }
+
+    public MenuItem getCopy() {
+        return copy;
+    }
+
+    public MenuItem getPaste() {
+        return paste;
+    }
+
+    public MenuItem getDelete() {
+        return delete;
+    }
+
+    public MenuItem getSelectAll() {
+        return selectAll;
+    }
+
+    public Button getRunBtn() {
+        return runBtn;
+    }
+    //</editor-fold>
 }
