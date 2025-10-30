@@ -1,6 +1,5 @@
 .root {
   -fx-background-color: #252525;
-  -fx-font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
   -fx-font-size: 13px; }
 
 .menu-bar {
@@ -35,16 +34,28 @@
 .context-menu {
   -fx-background-color: #1a1a1a;
   -fx-border-color: #363636;
-  -fx-font-size: 16;
   -fx-border-width: 1;
   -fx-background-radius: 6px;
   -fx-border-radius: 6px;
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.24), 10, 0, 0, 2);
   -fx-padding: 0; }
 
+.console-context-menu {
+  -fx-font-size: 16; }
+
+.separator {
+  -fx-background-color: #363636;
+  -fx-padding: 0; }
+
+.separator .line {
+  -fx-border-color: #363636;
+  -fx-border-width: 1 0 0 0;
+  -fx-border-insets: 0; }
+
 .button {
   -fx-background-color: #238636;
   -fx-text-fill: white;
+  -fx-font-family: "JetBrains Mono Medium";
   -fx-font-weight: 600;
   -fx-padding: 6 16 6 16;
   -fx-background-radius: 6px;
@@ -117,7 +128,7 @@
   -fx-text-fill: #dddddd;
   -fx-border-color: #363636;
   -fx-border-width: 1;
-  -fx-font-family: "Consolas", "Monaco", "Courier New", monospace;
+  -fx-font-family: "JetBrains Mono Medium";
   -fx-font-size: 14px; }
   .code-area .virtual-flow {
     -fx-background-color: #252525; }
@@ -135,10 +146,13 @@
 
 .line-number-text {
   -fx-text-fill: #b0b0b0;
-  -fx-font-family: "Consolas", "Monaco", "Courier New", monospace; }
+  -fx-font-family: "JetBrains Mono Medium"; }
 
 .caret {
   -fx-stroke: #dddddd; }
+
+.code-font {
+  -fx-font-family: "JetBrains Mono Medium"; }
 
 .keyword {
   -fx-fill: #CC7832;

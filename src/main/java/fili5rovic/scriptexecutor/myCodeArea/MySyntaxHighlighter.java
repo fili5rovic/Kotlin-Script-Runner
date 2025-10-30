@@ -5,7 +5,7 @@ import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,12 +48,12 @@ public class MySyntaxHighlighter {
                                                             matcher.group("NUMBER") != null ? "number" :
                                                                     "default_text";
 
-            spansBuilder.add(Collections.singleton("default_text"), matcher.start() - lastKwEnd);
-            spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
+            spansBuilder.add(List.of("code-font","default_text"), matcher.start() - lastKwEnd);
+            spansBuilder.add(List.of("code-font", styleClass), matcher.end() - matcher.start());
             lastKwEnd = matcher.end();
         }
 
-        spansBuilder.add(Collections.singleton("default_text"), text.length() - lastKwEnd);
+        spansBuilder.add(List.of("code-font","default_text"), text.length() - lastKwEnd);
         return spansBuilder.create();
     }
 }

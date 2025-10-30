@@ -12,6 +12,7 @@ public class ConsoleContextMenu extends ContextMenu {
     public ConsoleContextMenu(ConsoleArea consoleArea) {
         super();
         this.consoleArea = consoleArea;
+        this.getStyleClass().add("console-context-menu");
         init();
     }
 

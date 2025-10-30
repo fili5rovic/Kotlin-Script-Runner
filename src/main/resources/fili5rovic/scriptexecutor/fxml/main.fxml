@@ -42,10 +42,7 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="About">
                             <items>
-                                <MenuItem fx:id="menuitemThisProject" mnemonicParsing="false" text="This project">
-                           <accelerator>
-                              <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                           </accelerator></MenuItem>
+                                <MenuItem fx:id="menuitemThisProject" mnemonicParsing="false" text="This project" />
                             </items>
                         </Menu>
                     </menus>
