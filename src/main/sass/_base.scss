@@ -128,12 +128,8 @@
   -fx-background-color: transparent;
 
   .thumb {
-    -fx-background-color: $bg-lightest;
+    -fx-background-color: $bg-light;
     -fx-background-radius: 4;
-
-    &:hover {
-      -fx-background-color: $border-light;
-    }
   }
 
   .track {
@@ -143,6 +139,8 @@
   .increment-button, .decrement-button {
     -fx-background-color: transparent;
     -fx-padding: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
   }
 
   .increment-arrow, .decrement-arrow {
@@ -153,6 +151,7 @@
 
 .scroll-bar:vertical {
   -fx-padding: 2 0 2 0;
+  -fx-pref-width: 14;
 
   .thumb {
     -fx-background-insets: 0 2 0 2;
@@ -161,12 +160,12 @@
 
 .scroll-bar:horizontal {
   -fx-padding: 0 2 0 2;
+  -fx-pref-height: 14;
 
   .thumb {
     -fx-background-insets: 2 0 2 0;
   }
 }
-
 .text-area {
   -fx-background-color: $bg-dark;
   -fx-text-fill: $text-primary;

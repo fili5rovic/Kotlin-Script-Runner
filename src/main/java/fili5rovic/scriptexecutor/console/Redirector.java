@@ -29,6 +29,8 @@ public class Redirector {
     }
 
     public void sendInput(String input) {
+        if(this.process == null)
+            return;
         try {
             this.process.getOutputStream().write((input + "\n").getBytes());
             this.process.getOutputStream().flush();

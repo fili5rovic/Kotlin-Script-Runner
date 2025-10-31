@@ -5,6 +5,7 @@ import fili5rovic.scriptexecutor.console.behaviour.ErrorLineUtil;
 import fili5rovic.scriptexecutor.console.behaviour.FontHelper;
 import fili5rovic.scriptexecutor.console.contextMenu.ConsoleContextMenu;
 import fili5rovic.scriptexecutor.console.highlighter.ConsoleHighlighter;
+import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class ConsoleArea extends CodeArea {
 
     private ErrorLineUtil lineUtil;
 
+    private final VirtualizedScrollPane<CodeArea> scrollPane;
+
     public ConsoleArea() {
         ConsoleHighlighter.apply(this);
         BehaviourListener.apply(this);
@@ -31,6 +34,12 @@ public class ConsoleArea extends CodeArea {
 
         this.redirector = new Redirector(this);
         this.lineUtil = new ErrorLineUtil(this);
+
+        scrollPane = new VirtualizedScrollPane<>(this);
+    }
+
+    public VirtualizedScrollPane<CodeArea> getScrollPane() {
+        return scrollPane;
     }
 
 

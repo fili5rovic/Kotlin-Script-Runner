@@ -31,8 +31,8 @@ public class CodeManager implements IManager {
     private void createCodeAreas() {
         myCodeArea = new MyCodeArea();
         myConsoleArea = new ConsoleArea();
-        codeBP.setCenter(myCodeArea);
-        consoleBP.setCenter(myConsoleArea);
+        codeBP.setCenter(myCodeArea.getScrollPane());
+        consoleBP.setCenter(myConsoleArea.getScrollPane());
     }
 
 

@@ -5,6 +5,7 @@ module fili5rovic.scriptexecutor {
     requires java.desktop;
     requires com.kitfox.svg;
     requires javafx.swing;
+    requires org.fxmisc.flowless;
 
 
     opens fili5rovic.scriptexecutor to javafx.fxml;

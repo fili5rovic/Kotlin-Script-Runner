@@ -5,12 +5,13 @@ import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.ErrorLineClickedEvent;
 import fili5rovic.scriptexecutor.myCodeArea.shortcuts.ShortcutHelper;
 import javafx.collections.ObservableList;
+import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 
 public class MyCodeArea extends CodeArea {
 
-
     private final LineNumberFactory lineNumberFactory;
+    private final VirtualizedScrollPane<CodeArea> scrollPane;
 
     public MyCodeArea() {
         super();
@@ -25,6 +26,12 @@ public class MyCodeArea extends CodeArea {
         ShortcutHelper.applyShortcuts(this);
 
         EventBus.instance().register(ErrorLineClickedEvent.class, this::handleErrorLineClicked);
+
+        scrollPane = new VirtualizedScrollPane<>(this);
+    }
+
+    public VirtualizedScrollPane<CodeArea> getScrollPane() {
+        return scrollPane;
     }
 
     public int getParagraphsCount() {
