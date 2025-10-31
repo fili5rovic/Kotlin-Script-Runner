@@ -18,6 +18,10 @@ public class ProcessHelper {
         return stopped;
     }
 
+    public static boolean canReceiveInput() {
+        return currentProcess != null && currentProcess.isAlive() && !stopped;
+    }
+
     public static void beforeProcessStart(ConsoleArea console, String scriptPath) {
         BehaviourListener.clearInputBuffer();
         console.setTextType(ConsoleArea.OUTPUT);
@@ -48,6 +52,7 @@ public class ProcessHelper {
 
     private static void onProcessExit(ConsoleArea console, int code) {
         console.setEditable(false);
+        console.setTextType(ConsoleArea.OUTPUT);
         console.appendText("\nProcess finished with code: " + code + "\n");
 
         EventBus.instance().publish(new ProcessFinishedEvent());

@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.console.behaviour;
 
 import fili5rovic.scriptexecutor.console.ConsoleArea;
+import fili5rovic.scriptexecutor.console.ProcessHelper;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -16,6 +17,11 @@ public class BehaviourListener {
         console.setEditable(true);
 
         console.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if(!ProcessHelper.canReceiveInput()) {
+                e.consume();
+                return;
+            }
+
             if (e.getCode() == KeyCode.ENTER) {
                 console.appendText("\n");
                 console.setTextType(ConsoleArea.OUTPUT);
@@ -40,6 +46,11 @@ public class BehaviourListener {
 
         console.addEventFilter(KeyEvent.KEY_TYPED, e -> {
             if (e.isControlDown()) {
+                return;
+            }
+
+            if(!ProcessHelper.canReceiveInput()) {
+                e.consume();
                 return;
             }
 
