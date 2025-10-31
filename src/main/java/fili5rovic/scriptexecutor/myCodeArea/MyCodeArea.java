@@ -3,6 +3,7 @@ package fili5rovic.scriptexecutor.myCodeArea;
 
 import fili5rovic.scriptexecutor.myCodeArea.errorLineHandle.ErrorLineHandler;
 import fili5rovic.scriptexecutor.myCodeArea.shortcuts.ShortcutHelper;
+import fili5rovic.scriptexecutor.myCodeArea.theme.ThemeHelper;
 import javafx.collections.ObservableList;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
@@ -14,6 +15,9 @@ public class MyCodeArea extends CodeArea {
 
     public MyCodeArea() {
         super();
+
+        ThemeHelper themeHelper = new ThemeHelper(this);
+        themeHelper.applyListener();
 
         lineNumberFactory = new LineNumberFactory(this);
         this.setParagraphGraphicFactory(lineNumberFactory);

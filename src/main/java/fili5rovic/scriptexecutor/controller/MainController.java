@@ -1,12 +1,10 @@
 package fili5rovic.scriptexecutor.controller;
 
-import fili5rovic.scriptexecutor.manager.ButtonManager;
-import fili5rovic.scriptexecutor.manager.LabelManager;
+import fili5rovic.scriptexecutor.manager.*;
 import fili5rovic.scriptexecutor.manager.codeManager.CodeManager;
-import fili5rovic.scriptexecutor.manager.IManager;
-import fili5rovic.scriptexecutor.manager.MenuItemManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -56,13 +54,16 @@ public class MainController extends ControllerBase {
     private MenuItem selectAll;
 
     @FXML
+    private Label lineStatus;
+
+    @FXML
+    private ChoiceBox<String> themeChoiceBox;
+
+    @FXML
     private Button runBtn;
 
     @FXML
     private Button stopBtn;
-
-    @FXML
-    private Label lineStatus;
 
     @Override
     protected List<IManager> createManagers(Stage stage) {
@@ -71,6 +72,7 @@ public class MainController extends ControllerBase {
         managers.add(new MenuItemManager(this));
         managers.add(new ButtonManager(stage,this));
         managers.add(new LabelManager(this));
+        managers.add(new ChoiceBoxManager(this));
         return managers;
     }
 
@@ -136,6 +138,10 @@ public class MainController extends ControllerBase {
 
     public Button getStopBtn() {
         return stopBtn;
+    }
+
+    public ChoiceBox<String> getThemeChoiceBox() {
+        return themeChoiceBox;
     }
     //</editor-fold>
 }

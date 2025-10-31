@@ -40,17 +40,24 @@ public class ConsoleContextMenu extends ContextMenu {
         selectAllItem.setGraphic(SVGUtil.getUI("saveAll",16));
         selectAllItem.setOnAction(e -> consoleArea.selectAll());
 
+
+
+        MenuItem wrapItem = new MenuItem("Wrap Text");
+        wrapItem.setGraphic(SVGUtil.getUI("wrap",16));
+        wrapItem.setOnAction(e -> {
+            consoleArea.setWrapText(!consoleArea.isWrapText());
+            if(consoleArea.isWrapText()) {
+                wrapItem.setGraphic(SVGUtil.getUI("unwrap",16));
+            } else {
+                wrapItem.setGraphic(SVGUtil.getUI("wrap",16));
+            }
+        });
+
         MenuItem clearItem = new MenuItem("Clear");
         clearItem.setGraphic(SVGUtil.getUI("delete",16));
         clearItem.setOnAction(e -> {
             consoleArea.clear();
             consoleArea.setTextType(ConsoleArea.OUTPUT);
-        });
-
-        MenuItem wrapItem = new MenuItem("Wrap Text");
-        wrapItem.setGraphic(SVGUtil.getUI("format",16));
-        wrapItem.setOnAction(e -> {
-            consoleArea.setWrapText(!consoleArea.isWrapText());
         });
 
         setOnShowing(e -> {
@@ -65,8 +72,8 @@ public class ConsoleContextMenu extends ContextMenu {
                 new SeparatorMenuItem(),
                 selectAllItem,
                 new SeparatorMenuItem(),
-                clearItem,
-                wrapItem
+                wrapItem,
+                clearItem
         );
     }
 
