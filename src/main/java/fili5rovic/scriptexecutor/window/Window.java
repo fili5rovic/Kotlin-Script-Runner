@@ -3,6 +3,7 @@ package fili5rovic.scriptexecutor.window;
 
 import fili5rovic.scriptexecutor.Main;
 import fili5rovic.scriptexecutor.controller.ControllerBase;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,6 +33,7 @@ public abstract class Window {
             }
 
             stage.setMaximized(maximized);
+            stage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/fili5rovic/scriptexecutor/png/appIcon.png"))));
 
             try {
                 scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/styles.css")).toExternalForm());

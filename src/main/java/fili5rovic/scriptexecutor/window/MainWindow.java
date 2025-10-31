@@ -3,7 +3,7 @@ package fili5rovic.scriptexecutor.window;
 public class MainWindow extends Window {
 
     public MainWindow() {
-        super("ScriptExecutor", "main");
+        super("Kotlin Executor", "main");
         maximized = true;
     }
 

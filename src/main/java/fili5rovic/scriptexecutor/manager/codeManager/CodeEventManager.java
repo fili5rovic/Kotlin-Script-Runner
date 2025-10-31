@@ -15,6 +15,7 @@ import fili5rovic.scriptexecutor.util.OpenFileTracker;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -74,7 +75,7 @@ public class CodeEventManager implements IManager {
 
         codeArea.clear();
         OpenFileTracker.instance().registerOpenedFile(null);
-        stage.setTitle("ScriptExecutor");
+        stage.setTitle("Kotlin Executor");
     }
 
     private void onExitAppRequest(WindowEvent e) {
@@ -113,6 +114,10 @@ public class CodeEventManager implements IManager {
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(Main.class.getResource("css/alert.css")).toExternalForm());
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/fili5rovic/scriptexecutor/png/appIcon.png"))));
+
         alert.setTitle("Unsaved Changes");
         alert.setGraphic(null);
 
@@ -151,7 +156,7 @@ public class CodeEventManager implements IManager {
         File file = FileHelper.saveFileChooser("Save script");
         if (file != null) {
             OpenFileTracker.instance().saveAs(file, content);
-            stage.setTitle("ScriptExecutor - " + file.getName());
+            stage.setTitle("Kotlin Executor - " + file.getName());
             return true;
         }
         return false;
@@ -163,6 +168,6 @@ public class CodeEventManager implements IManager {
         codeArea.insertText(0, content);
 
         OpenFileTracker.instance().registerOpenedFile(file);
-        stage.setTitle("ScriptExecutor - " + file.getName());
+        stage.setTitle("Kotlin Executor - " + file.getName());
     }
 }
