@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.myCodeArea;
 
 
+import fili5rovic.scriptexecutor.myCodeArea.shortcuts.ShortcutHelper;
 import org.fxmisc.richtext.CodeArea;
 
 public class MyCodeArea extends CodeArea {
@@ -18,6 +19,7 @@ public class MyCodeArea extends CodeArea {
 
         CodeActionsManager codeActionsManager = new CodeActionsManager(this);
         codeActionsManager.setup();
+        ShortcutHelper.applyShortcuts(this);
     }
 }
 
