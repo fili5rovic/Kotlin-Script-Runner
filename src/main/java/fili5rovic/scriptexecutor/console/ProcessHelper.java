@@ -1,5 +1,7 @@
 package fili5rovic.scriptexecutor.console;
 
+import fili5rovic.scriptexecutor.events.EventBus;
+import fili5rovic.scriptexecutor.events.myEvents.ProcessFinishedEvent;
 import javafx.application.Platform;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,6 +23,8 @@ public class ProcessHelper {
     private static void onProcessExit(ConsoleArea console, int code) {
         console.setEditable(false);
         console.appendText("\nProcess finished with code: " + code + "\n");
+
+        EventBus.instance().publish(new ProcessFinishedEvent());
 
         console.moveTo(console.getLength());
         console.requestFollowCaret();
