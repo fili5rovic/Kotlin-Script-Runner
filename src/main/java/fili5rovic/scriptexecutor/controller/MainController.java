@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.controller;
 
 import fili5rovic.scriptexecutor.manager.ButtonManager;
+import fili5rovic.scriptexecutor.manager.LabelManager;
 import fili5rovic.scriptexecutor.manager.codeManager.CodeManager;
 import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.manager.MenuItemManager;
@@ -69,6 +70,7 @@ public class MainController extends ControllerBase {
         managers.add(new CodeManager(stage, this));
         managers.add(new MenuItemManager(this));
         managers.add(new ButtonManager(stage,this));
+        managers.add(new LabelManager(this));
         return managers;
     }
 

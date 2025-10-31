@@ -44,8 +44,6 @@ public class ConsoleArea extends CodeArea {
         return scrollPane;
     }
 
-
-
     public void applyProcess(Process process) {
         this.redirector.registerProcess(process);
         this.redirector.redirectStreams();

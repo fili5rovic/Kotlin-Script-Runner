@@ -1,5 +1,7 @@
 package fili5rovic.scriptexecutor.myCodeArea;
 
+import fili5rovic.scriptexecutor.events.EventBus;
+import fili5rovic.scriptexecutor.events.myEvents.CaretChangeEvent;
 import org.fxmisc.richtext.CodeArea;
 
 import java.util.Objects;
@@ -18,6 +20,12 @@ public class CodeActionsManager {
                 autoIndent();
             }
         });
+
+        codeArea.caretPositionProperty().addListener((obs, oldPos, newPos) -> {
+            EventBus.instance().publish(new CaretChangeEvent(codeArea.getCurrentParagraph() + 1, codeArea.getCaretColumn() + 1));
+        });
+
+
     }
 
     private void autoIndent() {

@@ -225,4 +225,7 @@
   .stop-button:selected {
     -fx-background-color: #cd0e0e; }
 
+.text-secondary {
+  -fx-text-fill: #b0b0b0; }
+
 /*# sourceMappingURL=../../../../../../target/styles.css.map */
