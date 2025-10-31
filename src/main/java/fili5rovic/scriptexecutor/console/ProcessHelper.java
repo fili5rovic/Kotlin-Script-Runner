@@ -1,5 +1,6 @@
 package fili5rovic.scriptexecutor.console;
 
+import fili5rovic.scriptexecutor.console.behaviour.BehaviourListener;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.CodeStopRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.ProcessFinishedEvent;
@@ -18,6 +19,8 @@ public class ProcessHelper {
     }
 
     public static void beforeProcessStart(ConsoleArea console, String scriptPath) {
+        BehaviourListener.clearInputBuffer();
+        console.setTextType(ConsoleArea.OUTPUT);
         Platform.runLater(() -> console.appendText("Executing: " + scriptPath + "\n"));
     }
 

@@ -39,7 +39,6 @@ public class ThemeHelper {
             codeArea.getStylesheets().add(newThemePath);
             codeArea.applyCss();
             currentThemeCss = newThemePath;
-            System.out.println("Applied theme: " + themeName);
         }
     }
 }

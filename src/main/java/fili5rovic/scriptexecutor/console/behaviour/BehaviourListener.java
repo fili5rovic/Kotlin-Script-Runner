@@ -6,10 +6,14 @@ import javafx.scene.input.KeyEvent;
 
 public class BehaviourListener {
 
+    private static final StringBuilder input = new StringBuilder();
+
+    public static void clearInputBuffer() {
+        input.setLength(0);
+    }
+
     public static void apply(ConsoleArea console) {
         console.setEditable(true);
-
-        StringBuilder input = new StringBuilder();
 
         console.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode() == KeyCode.ENTER) {
