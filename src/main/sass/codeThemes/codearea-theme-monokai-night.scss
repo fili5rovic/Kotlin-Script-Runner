@@ -1,0 +1,29 @@
+.keyword {
+  -fx-fill: #f92672;
+  -fx-font-weight: bold;
+}
+
+.string {
+  -fx-fill: #e6db74;
+}
+
+.function {
+  -fx-fill: #66d9ef;
+}
+
+.annotation {
+  -fx-fill: #fd971f;
+}
+
+.number {
+  -fx-fill: #ae81ff;
+}
+
+.default_text {
+  -fx-fill: #f8f8f2;
+}
+
+.comment {
+  -fx-fill: #75715e;
+  -fx-font-style: italic;
+}

@@ -1,0 +1,24 @@
+.keyword {
+  -fx-fill: #328ccc;
+  -fx-font-weight: bold; }
+
+.string {
+  -fx-fill: #3ca375; }
+
+.function {
+  -fx-fill: #6dbdff; }
+
+.annotation {
+  -fx-fill: #BBB529; }
+
+.number {
+  -fx-fill: #6869bb; }
+
+.default_text {
+  -fx-fill: #A9B7C6; }
+
+.comment {
+  -fx-fill: #808080;
+  -fx-font-style: italic; }
+
+/*# sourceMappingURL=../../../../../../../target/codeThemes/codearea-theme-darcula-blue.css.map */

@@ -173,3 +173,36 @@
 .text-area .content {
   -fx-background-color: $bg-dark;
 }
+
+.choice-box {
+  -fx-background-color: $bg-main;
+  -fx-border-color: $border-subtle;
+  -fx-border-width: 1;
+  -fx-border-radius: $radius-sm;
+  -fx-background-radius: $radius-sm;
+  -fx-padding: 2 8 2 8;
+
+  &:hover {
+    -fx-border-color: $border;
+  }
+
+}
+
+.choice-box .label {
+  -fx-text-fill: $text-primary;
+  -fx-font-size: 12px;
+}
+
+.choice-box .arrow {
+  -fx-background-color: $text-secondary;
+}
+
+.choice-box .arrow-button {
+  -fx-background-color: transparent;
+  -fx-padding: 0 4 0 4;
+}
+
+.choice-box .context-menu {
+  -fx-background-color: $bg-dark;
+  -fx-border-color: $border;
+}

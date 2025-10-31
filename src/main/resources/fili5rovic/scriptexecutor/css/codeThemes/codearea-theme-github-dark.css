@@ -1,0 +1,24 @@
+.keyword {
+  -fx-fill: #ff7b72;
+  -fx-font-weight: bold; }
+
+.string {
+  -fx-fill: #a5d6ff; }
+
+.function {
+  -fx-fill: #d2a8ff; }
+
+.annotation {
+  -fx-fill: #ffa657; }
+
+.number {
+  -fx-fill: #79c0ff; }
+
+.default_text {
+  -fx-fill: #e6edf3; }
+
+.comment {
+  -fx-fill: #8b949e;
+  -fx-font-style: italic; }
+
+/*# sourceMappingURL=../../../../../../../target/codeThemes/codearea-theme-github-dark.css.map */
