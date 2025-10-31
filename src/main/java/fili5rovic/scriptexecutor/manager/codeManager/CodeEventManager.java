@@ -3,12 +3,10 @@ package fili5rovic.scriptexecutor.manager.codeManager;
 import fili5rovic.scriptexecutor.Main;
 import fili5rovic.scriptexecutor.console.ConsoleArea;
 import fili5rovic.scriptexecutor.events.EventBus;
-import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
-import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
-import fili5rovic.scriptexecutor.events.myEvents.RunCodeRequestEvent;
-import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
+import fili5rovic.scriptexecutor.events.myEvents.*;
 import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
 import fili5rovic.scriptexecutor.manager.IManager;
+import fili5rovic.scriptexecutor.myCodeArea.shortcuts.CodeActions;
 import fili5rovic.scriptexecutor.script.ScriptRunner;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import fili5rovic.scriptexecutor.util.OpenFileTracker;
@@ -42,16 +40,40 @@ public class CodeEventManager implements IManager {
         EventBus.instance().register(SaveFileRequestEvent.class, this::onSaveFileRequest);
         EventBus.instance().register(NewFileRequestEvent.class, this::onNewFileRequest);
         EventBus.instance().register(RunCodeRequestEvent.class, this::onCodeRunRequest);
-
+        EventBus.instance().register(CodeEditRequestEvent.class, this::onCodeEditRequest);
 
         this.stage.setOnCloseRequest(this::onExitAppRequest);
+    }
+
+    private void onCodeEditRequest(CodeEditRequestEvent event) {
+        switch (event.getActionName()) {
+            case "undo":
+                codeArea.undo();
+                break;
+            case "redo":
+                codeArea.redo();
+                break;
+            case "cut":
+                codeArea.cut();
+                break;
+            case "copy":
+                codeArea.copy();
+                break;
+            case "paste":
+                codeArea.paste();
+                break;
+            case "delete":
+                CodeActions.deleteLine(codeArea);
+                break;
+            case "selectAll":
+                codeArea.selectAll();
+                break;
+        }
     }
 
     private void onCodeRunRequest(RunCodeRequestEvent event) {
         if(event == null)
             return;
-
-
 
         File file = OpenFileTracker.instance().getFile();
         if(file == null) {
@@ -64,6 +86,8 @@ public class CodeEventManager implements IManager {
                 System.err.println(e.getMessage());
                 return;
             }
+        } else {
+            onSaveFileRequest(new SaveFileRequestEvent());
         }
         String path = file.getAbsolutePath();
         ScriptRunner.runKotlinScript(path, consoleArea);
@@ -84,9 +108,6 @@ public class CodeEventManager implements IManager {
     }
 
     private void onSaveFileRequest(SaveFileRequestEvent event) {
-        if (event == null)
-            return;
-
         String currentContent = codeArea.getText();
         if (OpenFileTracker.instance().getFile() == null) {
             saveAs(currentContent);

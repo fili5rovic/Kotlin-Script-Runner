@@ -36,6 +36,8 @@ public class ConsoleArea extends CodeArea {
         this.lineUtil = new ErrorLineUtil(this);
 
         scrollPane = new VirtualizedScrollPane<>(this);
+
+        ProcessHelper.registerStopListener();
     }
 
     public VirtualizedScrollPane<CodeArea> getScrollPane() {

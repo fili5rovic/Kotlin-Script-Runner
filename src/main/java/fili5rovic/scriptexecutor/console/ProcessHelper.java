@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.console;
 
 import fili5rovic.scriptexecutor.events.EventBus;
+import fili5rovic.scriptexecutor.events.myEvents.CodeStopRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.ProcessFinishedEvent;
 import javafx.application.Platform;
 
@@ -8,8 +9,26 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProcessHelper {
+    private static Process currentProcess;
+    private static boolean stopped = false;
+
+
+    public static boolean isStopped() {
+        return stopped;
+    }
+
+    public static void registerStopListener() {
+        EventBus.instance().register(CodeStopRequestEvent.class, e -> {
+            if(currentProcess != null && currentProcess.isAlive()) {
+                currentProcess.destroy();
+                stopped = true;
+            }
+        });
+    }
 
     public static void waitForProcessExit(ConsoleArea console, Process process) {
+        currentProcess = process;
+        stopped = false;
         AtomicInteger exitCode = new AtomicInteger();
         CompletableFuture.runAsync(()-> {
             try {

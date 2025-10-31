@@ -6,6 +6,7 @@ import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.manager.MenuItemManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -56,12 +57,18 @@ public class MainController extends ControllerBase {
     @FXML
     private Button runBtn;
 
+    @FXML
+    private Button stopBtn;
+
+    @FXML
+    private Label lineStatus;
+
     @Override
     protected List<IManager> createManagers(Stage stage) {
         List<IManager> managers = new ArrayList<>();
         managers.add(new CodeManager(stage, this));
         managers.add(new MenuItemManager(this));
-        managers.add(new ButtonManager(this));
+        managers.add(new ButtonManager(stage,this));
         return managers;
     }
 
@@ -120,6 +127,13 @@ public class MainController extends ControllerBase {
 
     public Button getRunBtn() {
         return runBtn;
+    }
+    public Label getLineStatus() {
+        return lineStatus;
+    }
+
+    public Button getStopBtn() {
+        return stopBtn;
     }
     //</editor-fold>
 }

@@ -42,7 +42,10 @@ public class ConsoleContextMenu extends ContextMenu {
 
         MenuItem clearItem = new MenuItem("Clear");
         clearItem.setGraphic(SVGUtil.getUI("delete",16));
-        clearItem.setOnAction(e -> consoleArea.clear());
+        clearItem.setOnAction(e -> {
+            consoleArea.clear();
+            consoleArea.setTextType(ConsoleArea.OUTPUT);
+        });
 
         setOnShowing(e -> {
             boolean hasSelection = consoleArea.getSelectedText() != null

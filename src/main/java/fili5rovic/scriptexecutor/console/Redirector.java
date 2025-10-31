@@ -32,7 +32,7 @@ public class Redirector {
     }
 
     public void sendInput(String input) {
-        if(this.process == null)
+        if(this.process == null || !this.process.isAlive())
             return;
         try {
             this.process.getOutputStream().write((input + "\n").getBytes());
@@ -48,6 +48,8 @@ public class Redirector {
     }
 
     private void redirectOutput(InputStream inputStream, int type) {
+        if(this.process == null || !this.process.isAlive())
+            return;
         running = true;
         currentThread = new Thread(() -> {
             try {
@@ -60,7 +62,11 @@ public class Redirector {
                     char c = (char) ch;
                     // carriage return should be ignored on windows
                     if (c == '\r') continue;
-                    Platform.runLater(() -> console.appendTextWithType(String.valueOf(c), type));
+                    Platform.runLater(() -> {
+                        if(ProcessHelper.isStopped())
+                            return;
+                        console.appendTextWithType(String.valueOf(c), type);
+                    });
                 }
             } catch (Exception e) {
                 System.err.println("Error reading output stream: " + e.getMessage());
