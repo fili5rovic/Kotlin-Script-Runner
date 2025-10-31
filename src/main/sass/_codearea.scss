@@ -45,21 +45,16 @@
 }
 
 .keyword {
-  -fx-fill: #CC7832;
+  -fx-fill: #328ccc;
   -fx-font-weight: bold;
 }
 
 .string {
-  -fx-fill: #6A8759;
-}
-
-.comment {
-  -fx-fill: #808080;
-  -fx-font-style: italic;
+  -fx-fill: #3ca375;
 }
 
 .function {
-  -fx-fill: #FFC66D;
+  -fx-fill: #6dbdff;
 }
 
 .annotation {
@@ -67,9 +62,14 @@
 }
 
 .number {
-  -fx-fill: #a82a8e;
+  -fx-fill: #6869bb;
 }
 
 .default_text {
   -fx-fill: #A9B7C6;
+}
+
+.comment {
+  -fx-fill: #808080;
+  -fx-font-style: italic;
 }

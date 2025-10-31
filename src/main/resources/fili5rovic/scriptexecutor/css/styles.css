@@ -55,7 +55,6 @@
 .button {
   -fx-background-color: #238636;
   -fx-text-fill: white;
-  -fx-font-family: "JetBrains Mono Medium";
   -fx-font-weight: 600;
   -fx-padding: 6 16 6 16;
   -fx-background-radius: 6px;
@@ -157,27 +156,27 @@
   -fx-font-family: "JetBrains Mono Medium"; }
 
 .keyword {
-  -fx-fill: #CC7832;
+  -fx-fill: #328ccc;
   -fx-font-weight: bold; }
 
 .string {
-  -fx-fill: #6A8759; }
-
-.comment {
-  -fx-fill: #808080;
-  -fx-font-style: italic; }
+  -fx-fill: #3ca375; }
 
 .function {
-  -fx-fill: #FFC66D; }
+  -fx-fill: #6dbdff; }
 
 .annotation {
   -fx-fill: #BBB529; }
 
 .number {
-  -fx-fill: #a82a8e; }
+  -fx-fill: #6869bb; }
 
 .default_text {
   -fx-fill: #A9B7C6; }
+
+.comment {
+  -fx-fill: #808080;
+  -fx-font-style: italic; }
 
 .dialog-pane {
   -fx-background-color: #1a1a1a;
@@ -218,5 +217,12 @@
 .console_error {
   -fx-fill: #b00020;
   -fx-cursor: hand; }
+
+.stop-button {
+  -fx-background-color: #8a3232; }
+  .stop-button:hover {
+    -fx-background-color: #971b1b; }
+  .stop-button:selected {
+    -fx-background-color: #cd0e0e; }
 
 /*# sourceMappingURL=../../../../../../target/styles.css.map */

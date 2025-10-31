@@ -2,6 +2,7 @@ package fili5rovic.scriptexecutor.manager;
 
 import fili5rovic.scriptexecutor.controller.MainController;
 import fili5rovic.scriptexecutor.events.EventBus;
+import fili5rovic.scriptexecutor.events.myEvents.CodeEditRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
@@ -55,6 +56,14 @@ public class MenuItemManager implements IManager {
         controller.getMenuItemOpenFile().setOnAction(this::handleOpenFile);
         controller.getMenuItemSaveFile().setOnAction(this::handleSaveFile);
         controller.getMenuitemThisProject().setOnAction(this::handleThisProject);
+
+        controller.getUndo().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("undo")));
+        controller.getRedo().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("redo")));
+        controller.getCut().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("cut")));
+        controller.getCopy().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("copy")));
+        controller.getPaste().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("paste")));
+        controller.getDelete().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("delete")));
+        controller.getSelectAll().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("selectAll")));
     }
 
     private void handleSaveFile(ActionEvent event) {
