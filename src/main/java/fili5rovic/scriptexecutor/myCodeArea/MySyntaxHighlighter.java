@@ -1,9 +1,13 @@
 package fili5rovic.scriptexecutor.myCodeArea;
 
+import fili5rovic.scriptexecutor.Main;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class MySyntaxHighlighter {
 
-    private static final String KEYWORD_PATTERN = "\\b(fun|val|var|class|object|interface|if|else|when|for|while|return|import|package|try|catch|finally|throw)\\b";
+    private static final String KEYWORD_PATTERN = "\\b(" + keywordsPattern() + ")\\b";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'";
     private static final String COMMENT_PATTERN = "//[^\n]*|/\\*.*?\\*/";
     private static final String NUMBER_PATTERN = "\\b\\d+(\\.\\d+)?[fFdDlL]?\\b";
@@ -48,12 +52,25 @@ public class MySyntaxHighlighter {
                                                             matcher.group("NUMBER") != null ? "number" :
                                                                     "default_text";
 
-            spansBuilder.add(List.of("code-font","default_text"), matcher.start() - lastKwEnd);
+            spansBuilder.add(List.of("code-font", "default_text"), matcher.start() - lastKwEnd);
             spansBuilder.add(List.of("code-font", styleClass), matcher.end() - matcher.start());
             lastKwEnd = matcher.end();
         }
 
-        spansBuilder.add(List.of("code-font","default_text"), text.length() - lastKwEnd);
+        spansBuilder.add(List.of("code-font", "default_text"), text.length() - lastKwEnd);
         return spansBuilder.create();
+    }
+
+    private static String keywordsPattern() {
+        try (InputStream is = Main.class.getResourceAsStream("/fili5rovic/scriptexecutor/keywords/kotlinKeywords.csv")) {
+            if (is == null) {
+                throw new IllegalStateException("Keywords file not found in resources");
+            }
+            String keywords = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            return keywords.replaceAll(",", "|");
+        } catch (IOException e) {
+            System.err.println("Failed to read keywords file: " + e.getMessage());
+        }
+        return "";
     }
 }
