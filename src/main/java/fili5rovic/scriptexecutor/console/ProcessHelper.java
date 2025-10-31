@@ -17,6 +17,10 @@ public class ProcessHelper {
         return stopped;
     }
 
+    public static void beforeProcessStart(ConsoleArea console, String scriptPath) {
+        Platform.runLater(() -> console.appendText("Executing: " + scriptPath + "\n"));
+    }
+
     public static void registerStopListener() {
         EventBus.instance().register(CodeStopRequestEvent.class, e -> {
             if(currentProcess != null && currentProcess.isAlive()) {

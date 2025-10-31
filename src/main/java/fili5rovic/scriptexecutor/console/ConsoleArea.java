@@ -44,7 +44,12 @@ public class ConsoleArea extends CodeArea {
         return scrollPane;
     }
 
+    public void beforeApplyingProcess(String scriptPath) {
+        ProcessHelper.beforeProcessStart(this, scriptPath);
+    }
+
     public void applyProcess(Process process) {
+
         this.redirector.registerProcess(process);
         this.redirector.redirectStreams();
 

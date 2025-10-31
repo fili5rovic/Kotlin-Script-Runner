@@ -16,6 +16,7 @@ public class ScriptRunner {
 //                pb.environment().put("LC_ALL", "en_US.UTF-8");
 
                 Process process = pb.start();
+                console.beforeApplyingProcess(scriptPath);
                 console.applyProcess(process);
             } catch (IOException e) {
                 Platform.runLater(() -> console.appendText("\n[Error: " + e.getMessage() + "]\n"));

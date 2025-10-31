@@ -47,6 +47,12 @@ public class ConsoleContextMenu extends ContextMenu {
             consoleArea.setTextType(ConsoleArea.OUTPUT);
         });
 
+        MenuItem wrapItem = new MenuItem("Wrap Text");
+        wrapItem.setGraphic(SVGUtil.getUI("format",16));
+        wrapItem.setOnAction(e -> {
+            consoleArea.setWrapText(!consoleArea.isWrapText());
+        });
+
         setOnShowing(e -> {
             boolean hasSelection = consoleArea.getSelectedText() != null
                     && !consoleArea.getSelectedText().isEmpty();
@@ -59,7 +65,8 @@ public class ConsoleContextMenu extends ContextMenu {
                 new SeparatorMenuItem(),
                 selectAllItem,
                 new SeparatorMenuItem(),
-                clearItem
+                clearItem,
+                wrapItem
         );
     }
 

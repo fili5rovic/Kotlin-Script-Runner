@@ -8,7 +8,6 @@ public class BehaviourListener {
 
     public static void apply(ConsoleArea console) {
         console.setEditable(true);
-        console.setWrapText(true);
 
         StringBuilder input = new StringBuilder();
 
