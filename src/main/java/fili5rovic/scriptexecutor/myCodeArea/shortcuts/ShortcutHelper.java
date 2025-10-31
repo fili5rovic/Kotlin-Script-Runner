@@ -1,5 +1,6 @@
 package fili5rovic.scriptexecutor.myCodeArea.shortcuts;
 
+import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -8,7 +9,7 @@ import org.fxmisc.richtext.CodeArea;
 
 public class ShortcutHelper {
 
-    public static void applyShortcuts(CodeArea codeArea) {
+    public static void applyShortcuts(MyCodeArea codeArea) {
         codeArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
 
             if (event.getCode() == KeyCode.TAB && !event.isShiftDown()) {
