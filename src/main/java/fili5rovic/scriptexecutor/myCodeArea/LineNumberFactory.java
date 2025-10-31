@@ -21,21 +21,20 @@ public class LineNumberFactory implements IntFunction<Node> {
     private static final int INDICATOR_SPACE_ADDON = 10;
     private static final int MIN_INDICATOR_SPACE = 20;
 
-    private static final int MIN_INDICATOR_SIZE = 8;
     private static final int INDICATOR_SIZE_DIVIDER = 2;
 
     private static final int MAX_FONT_SIZE = 100;
     private static final int MIN_FONT_SIZE = 8;
     private static final int DEFAULT_FONT_SIZE = 24;
 
-    private final CodeArea codeGalaxy;
+    private final CodeArea codeArea;
     private int fontSize;
 
-    public LineNumberFactory(CodeArea codeGalaxy) {
-        this.codeGalaxy = codeGalaxy;
+    public LineNumberFactory(CodeArea codeArea) {
+        this.codeArea = codeArea;
         this.fontSize = DEFAULT_FONT_SIZE;
 
-        codeGalaxy.addEventFilter(ScrollEvent.SCROLL, e -> {
+        codeArea.addEventFilter(ScrollEvent.SCROLL, e -> {
             if (e.isControlDown()) {
                 e.consume();
 
@@ -48,29 +47,6 @@ public class LineNumberFactory implements IntFunction<Node> {
         });
 
         applyZoom();
-    }
-
-    private void increaseFontSize() {
-        if (fontSize < MAX_FONT_SIZE) {
-            fontSize += 2;
-            applyZoom();
-        }
-    }
-
-    private void decreaseFontSize() {
-        if (fontSize > MIN_FONT_SIZE) {
-            fontSize -= 2;
-            applyZoom();
-        }
-    }
-
-    private void applyZoom() {
-        codeGalaxy.setStyle("-fx-font-size: " + fontSize + "px;");
-
-        Platform.runLater(() -> {
-            codeGalaxy.setParagraphGraphicFactory(null);
-            codeGalaxy.setParagraphGraphicFactory(this);
-        });
     }
 
     @Override
@@ -100,12 +76,31 @@ public class LineNumberFactory implements IntFunction<Node> {
         HBox.setHgrow(spacer, Priority.ALWAYS);
         lineBox.getChildren().add(spacer);
 
-        Region placeholder = new Region();
-        int indicatorSize = Math.max(MIN_INDICATOR_SIZE, fontSize / INDICATOR_SIZE_DIVIDER);
-        placeholder.setMinSize(indicatorSize, indicatorSize);
-        placeholder.setMaxSize(indicatorSize, indicatorSize);
-        lineBox.getChildren().add(placeholder);
-
         return lineBox;
     }
+
+    private void increaseFontSize() {
+        if (fontSize < MAX_FONT_SIZE) {
+            fontSize += 2;
+            applyZoom();
+        }
+    }
+
+    private void decreaseFontSize() {
+        if (fontSize > MIN_FONT_SIZE) {
+            fontSize -= 2;
+            applyZoom();
+        }
+    }
+
+    private void applyZoom() {
+        codeArea.setStyle("-fx-font-size: " + fontSize + "px;");
+
+        Platform.runLater(() -> {
+            codeArea.setParagraphGraphicFactory(null);
+            codeArea.setParagraphGraphicFactory(this);
+        });
+    }
+
+
 }

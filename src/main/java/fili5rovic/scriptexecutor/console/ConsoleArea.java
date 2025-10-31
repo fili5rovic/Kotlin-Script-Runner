@@ -20,7 +20,7 @@ public class ConsoleArea extends CodeArea {
 
     private int textType = 3;
 
-    private ErrorLineUtil lineUtil;
+    private final ErrorLineUtil lineUtil;
 
     private final VirtualizedScrollPane<CodeArea> scrollPane;
 

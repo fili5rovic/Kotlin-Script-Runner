@@ -10,8 +10,11 @@ public class ScriptRunner {
     public static void runKotlinScript(String scriptPath, ConsoleArea console) {
         CompletableFuture.runAsync(() -> {
             try {
-                String kotlinCommand = getKotlinCommand();
-                ProcessBuilder pb = new ProcessBuilder(kotlinCommand, "-script", scriptPath);
+                ProcessBuilder pb = new ProcessBuilder(getKotlinCommand(), "-script", scriptPath);
+
+//                pb.environment().put("JAVA_TOOL_OPTIONS", "-Dfile.encoding=UTF-8");
+//                pb.environment().put("LC_ALL", "en_US.UTF-8");
+
                 Process process = pb.start();
                 console.applyProcess(process);
             } catch (IOException e) {

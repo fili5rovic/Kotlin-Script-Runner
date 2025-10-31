@@ -1,7 +1,7 @@
 package fili5rovic.scriptexecutor.events.myEvents;
 
 public class ErrorLineClickedEvent extends MyEvent{
-    private int lineNum,colNum;
+    private final int lineNum,colNum;
 
     public ErrorLineClickedEvent(int lineNum, int colNum) {
         this.lineNum = lineNum;

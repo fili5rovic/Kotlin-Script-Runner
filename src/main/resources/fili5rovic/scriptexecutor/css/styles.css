@@ -144,7 +144,7 @@
 .line-number-box {
   -fx-background-color: #252525;
   -fx-border-width: 0;
-  -fx-padding: 0; }
+  -fx-padding: 0 0 0 10; }
 
 .line-number-text {
   -fx-text-fill: #b0b0b0;
