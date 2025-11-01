@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.myCodeArea.shortcuts;
 
 import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
+import javafx.scene.control.IndexRange;
 
 public class CodeActions {
 
@@ -162,35 +163,69 @@ public class CodeActions {
         }
     }
 
-    public static void commentLine(MyCodeArea codeArea) {
+    public static void toggleComment(MyCodeArea codeArea) {
         int startPar = codeArea.getCaretSelectionBind().getStartParagraphIndex();
         int endPar = codeArea.getCaretSelectionBind().getEndParagraphIndex();
 
-        int finalCaretLine = -1;
-        int finalCaretCol = -1;
-
+        boolean allCommented = true;
         for (int i = startPar; i <= endPar; i++) {
             String line = codeArea.getText(i);
-            int caretColumn = codeArea.getCaretColumn();
-
-            if (line.startsWith("//")) {
-                codeArea.deleteText(i, 0, i, 2);
-            } else {
-                codeArea.insertText(i, 0, "//");
-                if (i + 1 < codeArea.getParagraphsCount()) {
-                    finalCaretLine = i + 1;
-                    finalCaretCol = caretColumn + 2;
-                } else {
-                    finalCaretLine = i;
-                    finalCaretCol = Math.min(caretColumn + 2, codeArea.getText(i).length());
-                }
+            if (line.trim().isEmpty()) {
+                continue;
+            }
+            if (!line.startsWith("//")) {
+                allCommented = false;
+                break;
             }
         }
-        if (finalCaretLine != -1) {
-            String targetLineText = codeArea.getText(finalCaretLine);
-            int maxCol = targetLineText.length();
-            int safeCaretCol = Math.min(finalCaretCol, maxCol);
-            codeArea.moveTo(finalCaretLine, safeCaretCol);
+
+        int caretParagraph = codeArea.getCurrentParagraph();
+        int caretColumn = codeArea.getCaretColumn();
+        IndexRange selection = codeArea.getSelection();
+        boolean hasSelection = selection.getLength() > 0;
+
+        if (allCommented) {
+            uncommentLines(codeArea, startPar, endPar);
+            if (caretParagraph >= startPar && caretParagraph <= endPar) {
+                int newColumn = Math.max(0, caretColumn - 3);
+                codeArea.moveTo(caretParagraph, newColumn);
+            }
+            if (hasSelection) {
+                int linesAffected = endPar - startPar + 1;
+                int newEnd = Math.max(selection.getStart(),
+                        selection.getEnd() - (3 * linesAffected));
+                codeArea.selectRange(selection.getStart(), newEnd);
+            }
+        } else {
+            commentLines(codeArea, startPar, endPar);
+            if (caretParagraph >= startPar && caretParagraph <= endPar) {
+                int newColumn = caretColumn + 3;
+                String line = codeArea.getText(caretParagraph);
+                codeArea.moveTo(caretParagraph, Math.min(newColumn, line.length()));
+            }
+            if (hasSelection) {
+                int linesAffected = endPar - startPar + 1;
+                int newEnd = selection.getEnd() + (3 * linesAffected);
+                codeArea.selectRange(selection.getStart(), newEnd);
+            }
+        }
+    }
+
+    private static void commentLines(MyCodeArea codeArea, int startPar, int endPar) {
+        for (int i = startPar; i <= endPar; i++) {
+            codeArea.insertText(i, 0, "// ");
+        }
+    }
+
+    private static void uncommentLines(MyCodeArea codeArea, int startPar, int endPar) {
+        for (int i = startPar; i <= endPar; i++) {
+            String line = codeArea.getText(i);
+
+            if (line.startsWith("// ")) {
+                codeArea.deleteText(i, 0, i, 3);
+            } else if (line.startsWith("//")) {
+                codeArea.deleteText(i, 0, i, 2);
+            }
         }
     }
 }

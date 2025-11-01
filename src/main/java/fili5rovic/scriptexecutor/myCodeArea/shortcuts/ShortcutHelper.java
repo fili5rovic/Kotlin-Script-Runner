@@ -47,7 +47,7 @@ public class ShortcutHelper {
             }
 
             if (new KeyCodeCombination(KeyCode.SLASH, KeyCombination.CONTROL_DOWN).match(event)) {
-                CodeActions.commentLine(codeArea);
+                CodeActions.toggleComment(codeArea);
                 event.consume();
             }
 
