@@ -30,30 +30,32 @@ public class ProcessHelper {
 
     public static void registerStopListener() {
         EventBus.instance().register(CodeStopRequestEvent.class, e -> {
-            if(currentProcess != null && currentProcess.isAlive()) {
+            if (currentProcess != null && currentProcess.isAlive()) {
                 stopped = true;
-                currentProcess.destroy();
+                BehaviourListener.clearInputBuffer();
+                destroyProcessTree(currentProcess);
             }
         });
     }
+
 
     public static void waitForProcessExit(ConsoleArea console, Process process) {
         currentProcess = process;
         stopped = false;
         AtomicInteger exitCode = new AtomicInteger();
-        CompletableFuture.runAsync(()-> {
+        CompletableFuture.runAsync(() -> {
             try {
                 exitCode.set(process.waitFor());
             } catch (InterruptedException e) {
                 System.err.println("Process wait interrupted: " + e.getMessage());
             }
-        }).thenRun(()-> Platform.runLater(() -> onProcessExit(console, exitCode.get())));
+        }).thenRun(() -> Platform.runLater(() -> onProcessExit(console, exitCode.get())));
     }
 
     private static void onProcessExit(ConsoleArea console, int code) {
         console.setEditable(false);
         console.setTextType(ConsoleArea.OUTPUT);
-        if(stopped) {
+        if (stopped) {
             console.setTextType(ConsoleArea.ERROR);
             console.appendText("\nProcess was stopped by user.\n");
             console.setTextType(ConsoleArea.OUTPUT);
@@ -65,5 +67,27 @@ public class ProcessHelper {
 
         console.moveTo(console.getLength());
         console.requestFollowCaret();
+    }
+
+    /**
+     * I needed to use this approach because sometimes child processes remain alive after destroying the parent process.
+     *
+     * @param process the root process to be destroyed
+     */
+    private static void destroyProcessTree(Process process) {
+        process.descendants().forEach(ProcessHandle::destroy);
+        process.destroy();
+
+        try {
+            boolean exited = process.waitFor(1, java.util.concurrent.TimeUnit.SECONDS);
+            if (!exited) {
+                process.descendants().forEach(ProcessHandle::destroyForcibly);
+                process.destroyForcibly();
+            }
+        } catch (InterruptedException e) {
+            process.descendants().forEach(ProcessHandle::destroyForcibly);
+            process.destroyForcibly();
+            Thread.currentThread().interrupt();
+        }
     }
 }
