@@ -22,7 +22,7 @@ public class CodeActionsManager {
         });
 
         codeArea.caretPositionProperty().addListener((obs, oldPos, newPos) -> {
-            EventBus.instance().publish(new CaretChangeEvent(codeArea.getCurrentParagraph() + 1, codeArea.getCaretColumn() + 1));
+            EventBus.instance().publish(new CaretChangeEvent(codeArea));
         });
 
 

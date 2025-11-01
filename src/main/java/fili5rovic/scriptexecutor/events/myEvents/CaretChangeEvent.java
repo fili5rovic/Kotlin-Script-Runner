@@ -1,19 +1,18 @@
 package fili5rovic.scriptexecutor.events.myEvents;
 
+import org.fxmisc.richtext.CodeArea;
+
 public class CaretChangeEvent extends MyEvent{
-    private final int lineNum;
-    private final int colNum;
+    private final CodeArea codeArea;
 
-    public CaretChangeEvent(int lineNum, int colNum) {
-        this.lineNum = lineNum;
-        this.colNum = colNum;
+    public CaretChangeEvent(CodeArea codeArea) {
+        this.codeArea = codeArea;
     }
 
-    public int getLineNum() {
-        return lineNum;
+    public CodeArea getCodeArea() {
+        return codeArea;
     }
 
-    public int getColNum() {
-        return colNum;
-    }
+
+
 }

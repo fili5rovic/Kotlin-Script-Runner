@@ -57,10 +57,10 @@
                         </Menu>
                     </menus>
                 </MenuBar>
-            <Region prefHeight="34.0" prefWidth="34.0" />
-            <Label fx:id="lineStatus" minWidth="30.0" prefHeight="34.0" prefWidth="34.0" styleClass="text-secondary" text="1:1" textAlignment="CENTER" />
+            <Region prefHeight="34.0" prefWidth="14.0" />
+            <Label fx:id="lineStatus" maxWidth="100.0" minWidth="100.0" prefHeight="34.0" prefWidth="100.0" styleClass="text-secondary" text="1:1" />
             <ChoiceBox fx:id="themeChoiceBox" minHeight="34.0" minWidth="100.0" />
-                <Region prefHeight="34.0" prefWidth="96.0" />
+                <Region prefHeight="34.0" prefWidth="59.0" />
                 <Button fx:id="runBtn" defaultButton="true" mnemonicParsing="false" text="  Run  " />
             <Region prefHeight="34.0" prefWidth="15.0" />
             <Button fx:id="stopBtn" cancelButton="true" minWidth="36.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" styleClass="stop-button" text="Stop" />

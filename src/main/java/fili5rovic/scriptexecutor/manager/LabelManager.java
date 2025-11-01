@@ -4,6 +4,7 @@ import fili5rovic.scriptexecutor.controller.MainController;
 import fili5rovic.scriptexecutor.events.EventBus;
 import fili5rovic.scriptexecutor.events.myEvents.CaretChangeEvent;
 import javafx.scene.control.Label;
+import org.fxmisc.richtext.CodeArea;
 
 public class LabelManager implements IManager {
     private final MainController controller;
@@ -18,10 +19,17 @@ public class LabelManager implements IManager {
     }
 
     private void onCaretChange(CaretChangeEvent event) {
-        int line = event.getLineNum();
-        int column = event.getColNum();
+        CodeArea codeArea = event.getCodeArea();
+        int line = codeArea.getCurrentParagraph() + 1;
+        int col = codeArea.getCaretColumn() + 1;
+
 
         Label lineStatus = controller.getLineStatus();
-        lineStatus.setText(line + ":" + column);
+        String text = line + ":" + col;
+        if(codeArea.getSelection().getLength() > 0) {
+            int selectionLength = codeArea.getSelection().getLength();
+            text += " (" + selectionLength + " chars)";
+        }
+        lineStatus.setText(text);
     }
 }
