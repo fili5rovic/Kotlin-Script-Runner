@@ -2,11 +2,15 @@ package fili5rovic.scriptexecutor.console.contextMenu;
 
 import fili5rovic.scriptexecutor.console.ConsoleArea;
 import fili5rovic.scriptexecutor.util.SVGUtil;
+import javafx.application.Platform;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import org.fxmisc.richtext.model.StyleSpans;
+
+import java.util.Collection;
 
 public class ConsoleContextMenu extends ContextMenu {
     private final ConsoleArea consoleArea;
@@ -46,6 +50,21 @@ public class ConsoleContextMenu extends ContextMenu {
         wrapItem.setGraphic(SVGUtil.getUI("wrap",16));
         wrapItem.setOnAction(e -> {
             consoleArea.setWrapText(!consoleArea.isWrapText());
+
+            Platform.runLater(() -> {
+                String text = consoleArea.getText();
+                StyleSpans<Collection<String>> styles = consoleArea.getStyleSpans(0, text.length());
+                int caretPos = consoleArea.getCaretPosition();
+
+                consoleArea.clear();
+
+                Platform.runLater(() -> {
+                    consoleArea.replaceText(text);
+                    consoleArea.setStyleSpans(0, styles);
+                    consoleArea.moveTo(caretPos);
+                });
+            });
+
             if(consoleArea.isWrapText()) {
                 wrapItem.setGraphic(SVGUtil.getUI("unwrap",16));
             } else {
