@@ -31,8 +31,8 @@ public class ProcessHelper {
     public static void registerStopListener() {
         EventBus.instance().register(CodeStopRequestEvent.class, e -> {
             if(currentProcess != null && currentProcess.isAlive()) {
-                currentProcess.destroy();
                 stopped = true;
+                currentProcess.destroy();
             }
         });
     }
@@ -53,7 +53,13 @@ public class ProcessHelper {
     private static void onProcessExit(ConsoleArea console, int code) {
         console.setEditable(false);
         console.setTextType(ConsoleArea.OUTPUT);
-        console.appendText("\nProcess finished with code: " + code + "\n");
+        if(stopped) {
+            console.setTextType(ConsoleArea.ERROR);
+            console.appendText("\nProcess was stopped by user.\n");
+            console.setTextType(ConsoleArea.OUTPUT);
+        } else {
+            console.appendText("\nProcess finished with code: " + code + "\n");
+        }
 
         EventBus.instance().publish(new ProcessFinishedEvent());
 

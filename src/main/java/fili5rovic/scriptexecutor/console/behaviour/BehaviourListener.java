@@ -26,8 +26,9 @@ public class BehaviourListener {
                 console.appendText("\n");
                 console.setTextType(ConsoleArea.OUTPUT);
                 if (!input.isEmpty()) {
-                    console.getRedirector().sendInput(input.toString());
+                    String inputToSend = input.toString();
                     input.setLength(0);
+                    console.getRedirector().sendInput(inputToSend);
                 }
                 e.consume();
             } else if (e.getCode() == KeyCode.BACK_SPACE) {
@@ -67,7 +68,4 @@ public class BehaviourListener {
             e.consume();
         });
     }
-
-
 }
-

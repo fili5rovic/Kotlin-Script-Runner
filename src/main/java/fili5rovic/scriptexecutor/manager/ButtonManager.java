@@ -6,6 +6,7 @@ import fili5rovic.scriptexecutor.events.myEvents.CodeStopRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.ProcessFinishedEvent;
 import fili5rovic.scriptexecutor.events.myEvents.RunCodeRequestEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -33,6 +34,17 @@ public class ButtonManager implements IManager {
     private void handleStopBtn() {
         stopBtn.setOnAction(e -> stopBtnAction());
         stopBtn.setDisable(true);
+
+        stopBtn.setTooltip(new Tooltip("Stop Execution (Ctrl+X)"));
+
+        KeyCombination accelerator = new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN);
+
+        stage.getScene().addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+            if (accelerator.match(event)) {
+                stopBtn.fire();
+                event.consume();
+            }
+        });
     }
 
     private void stopBtnAction() {
@@ -41,6 +53,8 @@ public class ButtonManager implements IManager {
 
     private void handleRunBtn() {
         runBtn.setOnAction(e -> runBtnAction());
+
+        runBtn.setTooltip(new Tooltip("Run Code (Ctrl+R)"));
 
         KeyCombination accelerator = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
 
