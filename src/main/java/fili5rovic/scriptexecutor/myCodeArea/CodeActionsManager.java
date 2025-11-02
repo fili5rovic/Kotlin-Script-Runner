@@ -79,9 +79,21 @@ public class CodeActionsManager {
             }
 
 
+        });
 
+        codeArea.setOnKeyTyped(e -> {
+            if(e.getCharacter().equals("(")) {
+                codeArea.insertText(codeArea.getCaretPosition(), ")");
+                codeArea.moveTo(codeArea.getCaretPosition() - 1);
+            }
+            if(e.getCharacter().equals("\"")) {
+                codeArea.insertText(codeArea.getCaretPosition(), "\"");
+                codeArea.moveTo(codeArea.getCaretPosition() - 1);
+            }
         });
     }
+
+
 
     public void setup() {
         codeArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {

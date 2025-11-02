@@ -44,6 +44,10 @@ public class FileHelper {
     public static File openFileChooser(String title) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(title);
+        File desktop = new File("C:\\Users\\fili5\\OneDrive\\Desktop\\kotlinScriptExamples");
+        if (desktop.exists()) {
+            fileChooser.setInitialDirectory(desktop);
+        }
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Kotlin Files", "*.kts"));
         return fileChooser.showOpenDialog(null);
     }
