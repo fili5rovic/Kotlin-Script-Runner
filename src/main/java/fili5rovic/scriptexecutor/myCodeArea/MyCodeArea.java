@@ -2,13 +2,14 @@ package fili5rovic.scriptexecutor.myCodeArea;
 
 
 import fili5rovic.scriptexecutor.myCodeArea.errorLineHandle.ErrorLineHandler;
-import fili5rovic.scriptexecutor.myCodeArea.shortcuts.ShortcutHelper;
 import fili5rovic.scriptexecutor.myCodeArea.theme.ThemeHelper;
 import javafx.collections.ObservableList;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 
 public class MyCodeArea extends CodeArea {
+
+    public static final int TAB_SIZE = 4;
 
     private final LineNumberFactory lineNumberFactory;
     private final VirtualizedScrollPane<CodeArea> scrollPane;
@@ -26,7 +27,7 @@ public class MyCodeArea extends CodeArea {
 
         CodeActionsManager codeActionsManager = new CodeActionsManager(this);
         codeActionsManager.setup();
-        ShortcutHelper.applyShortcuts(this);
+        codeActionsManager.applyShortcuts(this);
 
         ErrorLineHandler errorLineHandler = new ErrorLineHandler(this);
         errorLineHandler.registerListener();
