@@ -1,0 +1,63 @@
+.template-help-content {
+  -fx-background-color: #1a1a1a; }
+
+.template-help-header {
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-text-fill: #dddddd;
+  -fx-padding: 10 12 8 12; }
+
+.template-help-separator {
+  -fx-text-fill: #363636; }
+
+.template-box {
+  -fx-padding: 8 12 8 12; }
+
+.template-trigger {
+  -fx-font-family: "JetBrains Mono Medium";
+  -fx-font-size: 13px;
+  -fx-text-fill: #1f96bc;
+  -fx-font-weight: bold; }
+
+.template-code {
+  -fx-font-family: "JetBrains Mono Medium";
+  -fx-font-size: 11px;
+  -fx-text-fill: #b0b0b0; }
+
+.template-description {
+  -fx-font-size: 10px;
+  -fx-text-fill: #656d76;
+  -fx-font-style: italic; }
+
+.template-help-scroll {
+  -fx-background: #1a1a1a;
+  -fx-background-color: #1a1a1a; }
+  .template-help-scroll .viewport {
+    -fx-background-color: #1a1a1a; }
+  .template-help-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 14px;
+    -fx-padding: 2 0 2 0; }
+    .template-help-scroll .scroll-bar:vertical .track {
+      -fx-background-color: transparent;
+      -fx-background-radius: 0; }
+    .template-help-scroll .scroll-bar:vertical .thumb {
+      -fx-background-color: #323232;
+      -fx-background-radius: 4px;
+      -fx-background-insets: 0 2 0 2; }
+      .template-help-scroll .scroll-bar:vertical .thumb:hover {
+        -fx-background-color: #30363d; }
+      .template-help-scroll .scroll-bar:vertical .thumb:pressed {
+        -fx-background-color: #30363d; }
+    .template-help-scroll .scroll-bar:vertical .increment-button,
+    .template-help-scroll .scroll-bar:vertical .decrement-button {
+      -fx-background-color: transparent;
+      -fx-padding: 0;
+      -fx-pref-width: 0;
+      -fx-pref-height: 0; }
+    .template-help-scroll .scroll-bar:vertical .increment-arrow,
+    .template-help-scroll .scroll-bar:vertical .decrement-arrow {
+      -fx-shape: "";
+      -fx-padding: 0; }
+
+/*# sourceMappingURL=../../../../../../../target/templatesPopup/templates.css.map */

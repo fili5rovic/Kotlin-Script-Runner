@@ -21,16 +21,19 @@ public class MainController extends ControllerBase {
     private BorderPane consoleBP;
 
     @FXML
-    private MenuItem menuItemNewScript;
+    private MenuItem newScript;
 
     @FXML
-    private MenuItem menuItemOpenFile;
+    private MenuItem openFile;
 
     @FXML
-    private MenuItem menuItemSaveFile;
+    private MenuItem saveFile;
 
     @FXML
-    private MenuItem menuitemThisProject;
+    private MenuItem thisProject;
+
+    @FXML
+    private MenuItem templates;
 
     @FXML
     private MenuItem undo;
@@ -69,7 +72,7 @@ public class MainController extends ControllerBase {
     protected List<IManager> createManagers(Stage stage) {
         List<IManager> managers = new ArrayList<>();
         managers.add(new CodeManager(stage, this));
-        managers.add(new MenuItemManager(this));
+        managers.add(new MenuItemManager(stage, this));
         managers.add(new ButtonManager(stage,this));
         managers.add(new LabelManager(this));
         managers.add(new ChoiceBoxManager(this));
@@ -85,20 +88,20 @@ public class MainController extends ControllerBase {
         return consoleBP;
     }
 
-    public MenuItem getMenuItemNewScript() {
-        return menuItemNewScript;
+    public MenuItem getNewScript() {
+        return newScript;
     }
 
-    public MenuItem getMenuItemOpenFile() {
-        return menuItemOpenFile;
+    public MenuItem getOpenFile() {
+        return openFile;
     }
 
-    public MenuItem getMenuItemSaveFile() {
-        return menuItemSaveFile;
+    public MenuItem getSaveFile() {
+        return saveFile;
     }
 
-    public MenuItem getMenuitemThisProject() {
-        return menuitemThisProject;
+    public MenuItem getThisProject() {
+        return thisProject;
     }
 
     public MenuItem getUndo() {
@@ -142,6 +145,10 @@ public class MainController extends ControllerBase {
 
     public ChoiceBox<String> getThemeChoiceBox() {
         return themeChoiceBox;
+    }
+
+    public MenuItem getTemplates() {
+        return templates;
     }
     //</editor-fold>
 }

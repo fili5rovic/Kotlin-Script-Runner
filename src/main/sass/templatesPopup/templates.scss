@@ -1,0 +1,89 @@
+@import '../variables';
+
+$shortcut-color: #1f96bc;
+
+.template-help-content {
+  -fx-background-color: $bg-dark;
+}
+
+.template-help-header {
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-text-fill: $text-primary;
+  -fx-padding: 10 12 8 12;
+}
+
+.template-help-separator {
+  -fx-text-fill: $border;
+}
+
+.template-box {
+  -fx-padding: 8 12 8 12;
+}
+
+.template-trigger {
+  -fx-font-family: $font-family;
+  -fx-font-size: 13px;
+  -fx-text-fill: $shortcut-color;
+  -fx-font-weight: bold;
+}
+
+.template-code {
+  -fx-font-family: $font-family;
+  -fx-font-size: 11px;
+  -fx-text-fill: $text-secondary;
+}
+
+.template-description {
+  -fx-font-size: 10px;
+  -fx-text-fill: $text-muted;
+  -fx-font-style: italic;
+}
+
+.template-help-scroll {
+  -fx-background: $bg-dark;
+  -fx-background-color: $bg-dark;
+
+  .viewport {
+    -fx-background-color: $bg-dark;
+  }
+
+  .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 14px;
+    -fx-padding: 2 0 2 0;
+
+    .track {
+      -fx-background-color: transparent;
+      -fx-background-radius: 0;
+    }
+
+    .thumb {
+      -fx-background-color: $bg-light;
+      -fx-background-radius: 4px;
+      -fx-background-insets: 0 2 0 2;
+
+      &:hover {
+        -fx-background-color: $bg-lightest;
+      }
+
+      &:pressed {
+        -fx-background-color: $bg-lightest;
+      }
+    }
+
+    .increment-button,
+    .decrement-button {
+      -fx-background-color: transparent;
+      -fx-padding: 0;
+      -fx-pref-width: 0;
+      -fx-pref-height: 0;
+    }
+
+    .increment-arrow,
+    .decrement-arrow {
+      -fx-shape: "";
+      -fx-padding: 0;
+    }
+  }
+}

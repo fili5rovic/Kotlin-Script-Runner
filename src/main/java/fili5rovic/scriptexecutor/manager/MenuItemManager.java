@@ -6,9 +6,11 @@ import fili5rovic.scriptexecutor.events.myEvents.CodeEditRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
+import fili5rovic.scriptexecutor.myCodeArea.templates.TemplateHelp;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import fili5rovic.scriptexecutor.util.SVGUtil;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
@@ -16,17 +18,21 @@ import java.net.URI;
 
 public class MenuItemManager implements IManager {
     private final MainController controller;
+    private final Stage stage;
 
-    public MenuItemManager(MainController controller) {
+    public MenuItemManager(Stage stage, MainController controller) {
+        this.stage = stage;
         this.controller = controller;
         icons();
     }
 
     private void icons() {
-        controller.getMenuItemSaveFile().setGraphic(SVGUtil.getUI("saveAll", 16));
-        controller.getMenuItemOpenFile().setGraphic(SVGUtil.getUI("open",16));
-        controller.getMenuItemNewScript().setGraphic(SVGUtil.getUI("new",16));
-        controller.getMenuitemThisProject().setGraphic(SVGUtil.getUI("github",16));
+        controller.getSaveFile().setGraphic(SVGUtil.getUI("saveAll", 16));
+        controller.getOpenFile().setGraphic(SVGUtil.getUI("open",16));
+        controller.getNewScript().setGraphic(SVGUtil.getUI("new",16));
+        controller.getThisProject().setGraphic(SVGUtil.getUI("github",16));
+        controller.getTemplates().setGraphic(SVGUtil.getUI("code",16));
+
         controller.getUndo().setGraphic(SVGUtil.getUI("undo", 16));
         controller.getRedo().setGraphic(SVGUtil.getUI("redo", 16));
         controller.getCut().setGraphic(SVGUtil.getUI("cut", 16));
@@ -36,15 +42,7 @@ public class MenuItemManager implements IManager {
         controller.getSelectAll().setGraphic(SVGUtil.getUI("selectAll", 16));
     }
 
-    private void handleThisProject(ActionEvent e) {
-        if (Desktop.isDesktopSupported()) {
-            try {
-                Desktop.getDesktop().browse(new URI("https://github.com/fili5rovic/Kotlin-Script-Runner"));
-            } catch (Exception ex) {
-                System.err.println("Couldn't open browser: " + ex.getMessage());
-            }
-        }
-    }
+
 
     @Override
     public void initialize() {
@@ -52,10 +50,11 @@ public class MenuItemManager implements IManager {
     }
 
     private void setupListeners() {
-        controller.getMenuItemNewScript().setOnAction(this::handleNewScript);
-        controller.getMenuItemOpenFile().setOnAction(this::handleOpenFile);
-        controller.getMenuItemSaveFile().setOnAction(this::handleSaveFile);
-        controller.getMenuitemThisProject().setOnAction(this::handleThisProject);
+        controller.getNewScript().setOnAction(this::handleNewScript);
+        controller.getOpenFile().setOnAction(this::handleOpenFile);
+        controller.getSaveFile().setOnAction(this::handleSaveFile);
+        controller.getThisProject().setOnAction(this::handleThisProject);
+        controller.getTemplates().setOnAction(this::handleTemplateHelp);
 
         controller.getUndo().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("undo")));
         controller.getRedo().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("redo")));
@@ -64,6 +63,10 @@ public class MenuItemManager implements IManager {
         controller.getPaste().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("paste")));
         controller.getDelete().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("delete")));
         controller.getSelectAll().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("selectAll")));
+    }
+
+    private void handleTemplateHelp(ActionEvent ignored) {
+        TemplateHelp.showTemplateHelp(stage);
     }
 
     private void handleSaveFile(ActionEvent event) {
@@ -82,4 +85,13 @@ public class MenuItemManager implements IManager {
         EventBus.instance().publish(new NewFileRequestEvent());
     }
 
+    private void handleThisProject(ActionEvent e) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/fili5rovic/Kotlin-Script-Runner"));
+            } catch (Exception ex) {
+                System.err.println("Couldn't open browser: " + ex.getMessage());
+            }
+        }
+    }
 }

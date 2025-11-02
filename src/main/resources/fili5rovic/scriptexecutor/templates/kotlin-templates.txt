@@ -1,6 +1,10 @@
-p|println("");|9
-for|for (i in 1..) {\n\t\n}|13
-fun|fun () {\n\t\n}|4
-main|fun main() {\n\t\n}|14
-try|try {\n\t\n} catch (e: Exception) {\n\t\n}|7
-if|if () {\n\t\n}|4
+p|println("");|9|Prints a line with empty string to standard output
+pv|println();|8|Prints a variable to standard output
+for|for (i in 1..) {\n\t\n}|13|For loop iterating over a range
+fun|fun () {\n\t\n}|4|Function declaration
+main|fun main() {\n\t\n}|14|Main entry point function
+try|try {\n\t\n} catch (e: Exception) {\n\t\n}|7|Try-catch block for exception handling
+if|if () {\n\t\n}|4|If conditional statement
+ife|if () {\n\t\n} else {\n\t\n}|4|If-else conditional statement
+ifel|if () {\n\t\n} else if () {\n\t\n} else {\n\t\n}|4|If-else-if-else conditional chain
+sleep|try {\n\tThread.sleep()\n} catch (e: InterruptedException) {\n\te.printStackTrace()\n}|20|Thread sleep with exception handling

@@ -64,11 +64,12 @@ public class Templates {
                 if (line.isEmpty() || line.startsWith("//")) continue;
 
                 String[] parts = line.split("\\|");
-                if (parts.length == 3) {
+                if (parts.length >= 3) {
                     String trigger = parts[0];
                     String replacement = parts[1].replace("\\n", "\n").replace("\\t", "\t");
                     int caretOffset = Integer.parseInt(parts[2]);
-                    result.add(new Template(trigger, replacement, caretOffset));
+                    String description = parts.length >= 4 ? parts[3] : ""; // Description je optional
+                    result.add(new Template(trigger, replacement, caretOffset, description));
                 }
             }
         } catch (Exception e) {
@@ -77,4 +78,7 @@ public class Templates {
         return result;
     }
 
+    public static List<Template> getTemplates() {
+        return templates;
+    }
 }

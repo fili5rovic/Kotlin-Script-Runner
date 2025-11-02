@@ -21,16 +21,16 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
-                                <MenuItem fx:id="menuItemNewScript" mnemonicParsing="false" text="New script">
+                                <MenuItem fx:id="newScript" mnemonicParsing="false" text="New script">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                            </accelerator></MenuItem>
-                        <MenuItem fx:id="menuItemOpenFile" mnemonicParsing="false" text="Open file">
+                        <MenuItem fx:id="openFile" mnemonicParsing="false" text="Open file">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                            </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="menuItemSaveFile" mnemonicParsing="false" text="Save File">
+                        <MenuItem fx:id="saveFile" mnemonicParsing="false" text="Save File">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator>
@@ -52,7 +52,11 @@
                   </Menu>
                         <Menu mnemonicParsing="false" text="About">
                             <items>
-                                <MenuItem fx:id="menuitemThisProject" mnemonicParsing="false" text="This project" />
+                                <MenuItem fx:id="thisProject" mnemonicParsing="false" text="This project" />
+                        <MenuItem fx:id="templates" mnemonicParsing="false" text="Templates">
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator></MenuItem>
                             </items>
                         </Menu>
                     </menus>

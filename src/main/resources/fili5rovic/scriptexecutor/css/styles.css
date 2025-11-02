@@ -158,8 +158,6 @@
   -fx-font-size: 14px; }
   .code-area .virtual-flow {
     -fx-background-color: #252525; }
-  .code-area .paragraph-text {
-    -fx-tab-size: 2; }
   .code-area .paragraph-box {
     -fx-background-color: #252525; }
   .code-area .selection {
