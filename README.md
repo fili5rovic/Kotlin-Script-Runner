@@ -1,6 +1,11 @@
 # Kotlin Script Executor
 A modern GUI application for writing and executing Kotlin scripts with real-time output, proper error handling, syntax highlighting, and multiple theme support.
 
+<a href="https://www.jdeploy.com/~kotlin-script-executor?all=1" target="_blank">
+  <img src="https://img.shields.io/badge/DOWNLOAD-blue?style=for-the-badge" alt="Download">
+</a>
+
+
 ## Project Demo
 https://github.com/user-attachments/assets/c75f0fd1-5436-4538-a4a2-01dd0f6c34a2
 > [!NOTE]
