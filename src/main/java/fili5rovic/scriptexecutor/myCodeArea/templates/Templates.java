@@ -22,11 +22,30 @@ public class Templates {
             if (trimmedLine.equals(template.getTrigger())) {
                 int leading = currentLine.indexOf(trimmedLine);
                 int end = leading + template.getTrigger().length();
-                codeArea.replaceText(paragraph, leading, paragraph, end, template.getReplacement());
+
+                String indent = currentLine.substring(0, leading);
+                String indentedReplacement = addIndentToAllLines(template.getReplacement(), indent);
+
+                codeArea.replaceText(paragraph, leading, paragraph, end, indentedReplacement);
                 codeArea.moveTo(paragraph, leading + template.getCaretOffset());
                 return;
             }
         }
+    }
+
+    private static String addIndentToAllLines(String text, String indent) {
+        String[] lines = text.split("\n", -1);
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < lines.length; i++) {
+            if (i == 0) {
+                result.append(lines[i]);
+            } else {
+                result.append("\n").append(indent).append(lines[i]);
+            }
+        }
+
+        return result.toString();
     }
 
     private static List<Template> loadTemplates() {
