@@ -11,7 +11,6 @@ public class MyCodeArea extends CodeArea {
 
     public static final int TAB_SIZE = 4;
 
-    private final LineNumberFactory lineNumberFactory;
     private final VirtualizedScrollPane<CodeArea> scrollPane;
 
     public MyCodeArea() {
@@ -20,7 +19,8 @@ public class MyCodeArea extends CodeArea {
         ThemeHelper themeHelper = new ThemeHelper(this);
         themeHelper.applyListener();
 
-        lineNumberFactory = new LineNumberFactory(this);
+        LineNumberFactory lineNumberFactory = new LineNumberFactory(this);
+        lineNumberFactory.setup();
         this.setParagraphGraphicFactory(lineNumberFactory);
 
         MySyntaxHighlighter.setupHighlighting(this);

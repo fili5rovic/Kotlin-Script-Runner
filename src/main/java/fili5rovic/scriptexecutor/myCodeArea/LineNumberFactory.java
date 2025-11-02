@@ -33,7 +33,9 @@ public class LineNumberFactory implements IntFunction<Node> {
     public LineNumberFactory(CodeArea codeArea) {
         this.codeArea = codeArea;
         this.fontSize = DEFAULT_FONT_SIZE;
+    }
 
+    public void setup() {
         codeArea.addEventFilter(ScrollEvent.SCROLL, e -> {
             if (e.isControlDown()) {
                 e.consume();
