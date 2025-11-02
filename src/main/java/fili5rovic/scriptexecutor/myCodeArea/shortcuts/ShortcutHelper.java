@@ -1,6 +1,7 @@
 package fili5rovic.scriptexecutor.myCodeArea.shortcuts;
 
 import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
+import fili5rovic.scriptexecutor.myCodeArea.templates.Templates;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -10,6 +11,16 @@ public class ShortcutHelper {
 
     public static void applyShortcuts(MyCodeArea codeArea) {
         codeArea.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+
+            if (event.getCode() == KeyCode.SPACE && event.isControlDown()) {
+                Templates.applyTemplates(codeArea);
+                event.consume();
+            }
+
+            if (event.getCode() == KeyCode.L && event.isControlDown() && event.isAltDown()) {
+                CodeActions.formatCode(codeArea);
+                event.consume();
+            }
 
             if (event.getCode() == KeyCode.TAB && !event.isShiftDown()) {
                 CodeActions.indentForward(codeArea);

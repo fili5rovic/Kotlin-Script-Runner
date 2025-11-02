@@ -1,0 +1,6 @@
+p|println("");|9
+for|for (i in 1..) {\n\t\n}|13
+fun|fun () {\n\t\n}|4
+main|fun main() {\n\t\n}|14
+try|try {\n\t\n} catch (e: Exception) {\n\t\n}|7
+if|if () {\n\t\n}|4

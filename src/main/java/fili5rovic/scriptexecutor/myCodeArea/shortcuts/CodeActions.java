@@ -1,7 +1,9 @@
 package fili5rovic.scriptexecutor.myCodeArea.shortcuts;
 
 import fili5rovic.scriptexecutor.myCodeArea.MyCodeArea;
+import fili5rovic.scriptexecutor.util.KotlinFormatter;
 import javafx.scene.control.IndexRange;
+import org.fxmisc.richtext.CodeArea;
 
 public class CodeActions {
 
@@ -226,6 +228,23 @@ public class CodeActions {
             } else if (line.startsWith("//")) {
                 codeArea.deleteText(i, 0, i, 2);
             }
+        }
+    }
+
+    public static void formatCode(CodeArea codeArea) {
+        if(codeArea.getText().trim().isEmpty()) {
+            return;
+        }
+        String originalText = codeArea.getText();
+        try {
+            String formattedText = KotlinFormatter.format(originalText);
+            if (formattedText != null && !formattedText.equals(originalText)) {
+                int caretPosition = codeArea.getCaretPosition();
+                codeArea.replaceText(formattedText);
+                codeArea.moveTo(caretPosition);
+            }
+        } catch (Exception e) {
+            System.err.println("Code formatting failed: " + e.getMessage());
         }
     }
 }
