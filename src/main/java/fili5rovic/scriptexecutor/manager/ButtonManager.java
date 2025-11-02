@@ -35,9 +35,9 @@ public class ButtonManager implements IManager {
         stopBtn.setOnAction(e -> stopBtnAction());
         stopBtn.setDisable(true);
 
-        stopBtn.setTooltip(new Tooltip("Stop Execution (Ctrl+X)"));
+        stopBtn.setTooltip(new Tooltip("Stop Execution (Ctrl+Q)"));
 
-        KeyCombination accelerator = new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN);
+        KeyCombination accelerator = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
 
         stage.getScene().addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
             if (accelerator.match(event)) {

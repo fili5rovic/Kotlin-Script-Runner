@@ -20,6 +20,7 @@ public class CodeActionsManager {
 
     public void applyShortcuts(MyCodeArea codeArea) {
         codeArea.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+
             if (event.getCode() == KeyCode.SPACE && event.isControlDown()) {
                 Templates.applyTemplates(codeArea);
                 event.consume();
@@ -27,6 +28,7 @@ public class CodeActionsManager {
 
             if (event.getCode() == KeyCode.L && event.isControlDown() && event.isAltDown()) {
                 CodeActions.formatCode(codeArea);
+                System.out.println("FORMAT");
                 event.consume();
             }
 
@@ -76,6 +78,8 @@ public class CodeActionsManager {
                 CodeActions.toggleComment(codeArea);
                 event.consume();
             }
+
+
 
         });
     }
