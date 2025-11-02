@@ -16,20 +16,25 @@ import java.util.regex.Pattern;
 public class MySyntaxHighlighter {
 
     private static final String KEYWORD_PATTERN = "\\b(" + keywordsPattern() + ")\\b";
-    private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'";
-    private static final String COMMENT_PATTERN = "//[^\n]*|/\\*.*?\\*/";
+    private static final String STRING_PATTERN = "\"\"\"([\\s\\S]*?)\"\"\"|\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'";
+    private static final String COMMENT_PATTERN = "//[^\\n]*|/\\*.*?\\*/";
     private static final String NUMBER_PATTERN = "\\b\\d+(\\.\\d+)?[fFdDlL]?\\b";
     private static final String FUNCTION_PATTERN = "\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*\\()";
     private static final String ANNOTATION_PATTERN = "@[a-zA-Z_][a-zA-Z0-9_]*";
 
-    private static final Pattern PATTERN = Pattern.compile(
+    private static final String INTERPOLATION_PATTERN = "\\$[a-zA-Z_][a-zA-Z0-9_]*|\\$\\{[^}]+}";
+
+    private static final Pattern MAIN_PATTERN = Pattern.compile(
             "(?<COMMENT>" + COMMENT_PATTERN + ")"
                     + "|(?<KEYWORD>" + KEYWORD_PATTERN + ")"
                     + "|(?<STRING>" + STRING_PATTERN + ")"
                     + "|(?<ANNOTATION>" + ANNOTATION_PATTERN + ")"
                     + "|(?<FUNCTION>" + FUNCTION_PATTERN + ")"
-                    + "|(?<NUMBER>" + NUMBER_PATTERN + ")"
+                    + "|(?<NUMBER>" + NUMBER_PATTERN + ")",
+            Pattern.MULTILINE
     );
+
+    private static final Pattern INTERP_INSIDE_STRING = Pattern.compile(INTERPOLATION_PATTERN);
 
     public static void setupHighlighting(CodeArea codeArea) {
         codeArea.textProperty().addListener((ignored1, ignored2, newText) -> {
@@ -38,27 +43,48 @@ public class MySyntaxHighlighter {
     }
 
     public static StyleSpans<Collection<String>> computeHighlighting(String text) {
-        Matcher matcher = PATTERN.matcher(text);
+        Matcher matcher = MAIN_PATTERN.matcher(text);
         int lastKwEnd = 0;
         StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
 
         while (matcher.find()) {
-            String styleClass =
-                    matcher.group("COMMENT") != null ? "comment" :
-                            matcher.group("KEYWORD") != null ? "keyword" :
-                                    matcher.group("STRING") != null ? "string" :
-                                            matcher.group("ANNOTATION") != null ? "annotation" :
-                                                    matcher.group("FUNCTION") != null ? "function" :
-                                                            matcher.group("NUMBER") != null ? "number" :
-                                                                    "default_text";
-
             spansBuilder.add(List.of("code-font", "default_text"), matcher.start() - lastKwEnd);
-            spansBuilder.add(List.of("code-font", styleClass), matcher.end() - matcher.start());
+
+            if (matcher.group("STRING") != null) {
+                handleStringHighlight(matcher, spansBuilder);
+            } else {
+                String styleClass =
+                        matcher.group("COMMENT") != null ? "comment" :
+                                matcher.group("KEYWORD") != null ? "keyword" :
+                                        matcher.group("ANNOTATION") != null ? "annotation" :
+                                                matcher.group("FUNCTION") != null ? "function" :
+                                                        matcher.group("NUMBER") != null ? "number" :
+                                                                "default_text";
+
+                spansBuilder.add(List.of("code-font", styleClass), matcher.end() - matcher.start());
+            }
+
             lastKwEnd = matcher.end();
         }
 
         spansBuilder.add(List.of("code-font", "default_text"), text.length() - lastKwEnd);
         return spansBuilder.create();
+    }
+
+    private static void handleStringHighlight(Matcher matcher, StyleSpansBuilder<Collection<String>> spansBuilder) {
+        String stringText = matcher.group();
+        Matcher im = INTERP_INSIDE_STRING.matcher(stringText);
+        int lastInterpEnd = 0;
+        while (im.find()) {
+            if (im.start() - lastInterpEnd > 0) {
+                spansBuilder.add(List.of("code-font", "string"), im.start() - lastInterpEnd);
+            }
+            spansBuilder.add(List.of("code-font", "interpolation"), im.end() - im.start());
+            lastInterpEnd = im.end();
+        }
+        if (stringText.length() - lastInterpEnd > 0) {
+            spansBuilder.add(List.of("code-font", "string"), stringText.length() - lastInterpEnd);
+        }
     }
 
     private static String keywordsPattern() {
