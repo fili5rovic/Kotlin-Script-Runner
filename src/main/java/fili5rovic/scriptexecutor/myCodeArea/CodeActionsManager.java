@@ -28,7 +28,6 @@ public class CodeActionsManager {
 
             if (event.getCode() == KeyCode.L && event.isControlDown() && event.isAltDown()) {
                 CodeActions.formatCode(codeArea);
-                System.out.println("FORMAT");
                 event.consume();
             }
 

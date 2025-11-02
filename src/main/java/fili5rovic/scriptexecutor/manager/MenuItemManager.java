@@ -40,6 +40,7 @@ public class MenuItemManager implements IManager {
         controller.getPaste().setGraphic(SVGUtil.getUI("paste", 16));
         controller.getDelete().setGraphic(SVGUtil.getUI("delete", 16));
         controller.getSelectAll().setGraphic(SVGUtil.getUI("selectAll", 16));
+        controller.getFormat().setGraphic(SVGUtil.getUI("format",16));
     }
 
 
@@ -63,6 +64,7 @@ public class MenuItemManager implements IManager {
         controller.getPaste().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("paste")));
         controller.getDelete().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("delete")));
         controller.getSelectAll().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("selectAll")));
+        controller.getFormat().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("format")));
     }
 
     private void handleTemplateHelp(ActionEvent ignored) {

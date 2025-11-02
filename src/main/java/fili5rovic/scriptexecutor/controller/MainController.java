@@ -57,6 +57,9 @@ public class MainController extends ControllerBase {
     private MenuItem selectAll;
 
     @FXML
+    private MenuItem format;
+
+    @FXML
     private Label lineStatus;
 
     @FXML
@@ -149,6 +152,10 @@ public class MainController extends ControllerBase {
 
     public MenuItem getTemplates() {
         return templates;
+    }
+
+    public MenuItem getFormat() {
+        return format;
     }
     //</editor-fold>
 }

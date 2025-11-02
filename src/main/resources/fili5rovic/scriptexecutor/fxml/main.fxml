@@ -46,8 +46,9 @@
                         <MenuItem fx:id="copy" mnemonicParsing="false" text="Copy" />
                         <MenuItem fx:id="paste" mnemonicParsing="false" text="Paste" />
                         <MenuItem fx:id="delete" mnemonicParsing="false" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="selectAll" mnemonicParsing="false" text="Select All" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="format" mnemonicParsing="false" text="Format" />
                      </items>
                   </Menu>
                         <Menu mnemonicParsing="false" text="About">

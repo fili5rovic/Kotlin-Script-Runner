@@ -9,6 +9,7 @@ import fili5rovic.scriptexecutor.manager.IManager;
 import fili5rovic.scriptexecutor.myCodeArea.shortcuts.CodeActions;
 import fili5rovic.scriptexecutor.script.ScriptRunner;
 import fili5rovic.scriptexecutor.util.FileHelper;
+import fili5rovic.scriptexecutor.util.KotlinFormatter;
 import fili5rovic.scriptexecutor.util.OpenFileTracker;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -64,6 +65,11 @@ public class CodeEventManager implements IManager {
                 break;
             case "delete":
                 CodeActions.deleteLine(codeArea);
+                break;
+            case "format":
+                String formatted = KotlinFormatter.format(codeArea.getText());
+                codeArea.clear();
+                codeArea.insertText(0, formatted);
                 break;
             case "selectAll":
                 codeArea.selectAll();
