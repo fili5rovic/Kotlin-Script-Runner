@@ -17,7 +17,7 @@
     <top>
         <HBox BorderPane.alignment="CENTER">
             <children>
-                <MenuBar minWidth="151.0" prefHeight="25.0" prefWidth="151.0">
+                <MenuBar minWidth="220.0" prefHeight="34.0" prefWidth="220.0">
                     <menus>
                         <Menu mnemonicParsing="false" text="File">
                             <items>
@@ -51,6 +51,11 @@
                         <MenuItem fx:id="format" mnemonicParsing="false" text="Format" />
                      </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="Window">
+                     <items>
+                        <MenuItem fx:id="orientationChange" mnemonicParsing="false" text="Change orientation" />
+                     </items>
+                  </Menu>
                         <Menu mnemonicParsing="false" text="About">
                             <items>
                                 <MenuItem fx:id="thisProject" mnemonicParsing="false" text="This project" />
@@ -69,11 +74,12 @@
                 <Button fx:id="runBtn" defaultButton="true" mnemonicParsing="false" text="  Run  " />
             <Region prefHeight="34.0" prefWidth="15.0" />
             <Button fx:id="stopBtn" cancelButton="true" minWidth="36.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" styleClass="stop-button" text="Stop" />
+            <Region prefHeight="34.0" prefWidth="239.0" />
             </children>
         </HBox>
     </top>
     <center>
-        <SplitPane dividerPositions="0.561122244488978" prefHeight="500.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+        <SplitPane fx:id="splitPane" dividerPositions="0.561122244488978" prefHeight="500.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
             <items>
                 <BorderPane fx:id="codeBP" />
             <BorderPane fx:id="consoleBP" />

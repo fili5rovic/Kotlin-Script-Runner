@@ -3,10 +3,7 @@ package fili5rovic.scriptexecutor.controller;
 import fili5rovic.scriptexecutor.manager.*;
 import fili5rovic.scriptexecutor.manager.codeManager.CodeManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -16,7 +13,11 @@ import java.util.List;
 public class MainController extends ControllerBase {
 
     @FXML
+    private SplitPane splitPane;
+
+    @FXML
     private BorderPane codeBP;
+
     @FXML
     private BorderPane consoleBP;
 
@@ -60,6 +61,9 @@ public class MainController extends ControllerBase {
     private MenuItem format;
 
     @FXML
+    private MenuItem orientationChange;
+
+    @FXML
     private Label lineStatus;
 
     @FXML
@@ -70,6 +74,8 @@ public class MainController extends ControllerBase {
 
     @FXML
     private Button stopBtn;
+
+
 
     @Override
     protected List<IManager> createManagers(Stage stage) {
@@ -156,6 +162,14 @@ public class MainController extends ControllerBase {
 
     public MenuItem getFormat() {
         return format;
+    }
+
+    public SplitPane getSplitPane() {
+        return splitPane;
+    }
+
+    public MenuItem getOrientationChange() {
+        return orientationChange;
     }
     //</editor-fold>
 }

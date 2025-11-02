@@ -4,7 +4,7 @@ public class MainWindow extends Window {
 
     public MainWindow() {
         super("Kotlin Executor", "main");
-        maximized = true;
+//        maximized = true;
     }
 
     @Override

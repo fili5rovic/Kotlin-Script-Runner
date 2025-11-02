@@ -7,6 +7,7 @@ import fili5rovic.scriptexecutor.events.myEvents.FileOpenRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.NewFileRequestEvent;
 import fili5rovic.scriptexecutor.events.myEvents.SaveFileRequestEvent;
 import fili5rovic.scriptexecutor.myCodeArea.templates.TemplateHelp;
+import fili5rovic.scriptexecutor.util.AnimUtil;
 import fili5rovic.scriptexecutor.util.FileHelper;
 import fili5rovic.scriptexecutor.util.SVGUtil;
 import javafx.event.ActionEvent;
@@ -32,6 +33,7 @@ public class MenuItemManager implements IManager {
         controller.getNewScript().setGraphic(SVGUtil.getUI("new",16));
         controller.getThisProject().setGraphic(SVGUtil.getUI("github",16));
         controller.getTemplates().setGraphic(SVGUtil.getUI("code",16));
+        controller.getOrientationChange().setGraphic(SVGUtil.getUI("windows",16));
 
         controller.getUndo().setGraphic(SVGUtil.getUI("undo", 16));
         controller.getRedo().setGraphic(SVGUtil.getUI("redo", 16));
@@ -56,6 +58,7 @@ public class MenuItemManager implements IManager {
         controller.getSaveFile().setOnAction(this::handleSaveFile);
         controller.getThisProject().setOnAction(this::handleThisProject);
         controller.getTemplates().setOnAction(this::handleTemplateHelp);
+        controller.getOrientationChange().setOnAction(e -> AnimUtil.animateOrientationChange(controller.getSplitPane()));
 
         controller.getUndo().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("undo")));
         controller.getRedo().setOnAction(e -> EventBus.instance().publish(new CodeEditRequestEvent("redo")));
