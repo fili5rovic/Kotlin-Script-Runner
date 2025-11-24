@@ -13,14 +13,12 @@ public class AnimUtil {
         shrink.setToY(0.1);
 
         shrink.setOnFinished(ev -> {
-            // Promeni orijentaciju
             Orientation old = splitPane.getOrientation();
             splitPane.setOrientation(
                     old == Orientation.HORIZONTAL ? Orientation.VERTICAL : Orientation.HORIZONTAL
             );
             splitPane.setDividerPositions(0.5);
 
-            // Animacija "raširivanja"
             ScaleTransition expand = new ScaleTransition(Duration.millis(200), splitPane);
             expand.setToX(1);
             expand.setToY(1);
